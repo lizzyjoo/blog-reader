@@ -1,4 +1,7 @@
 import { Link } from "react-router-dom";
+import heart from "../assets/heart.png";
+import comment from "../assets/commentIcon.png";
+import viewIcon from "../assets/viewIcon.png";
 
 import "../styles/postcard.css";
 export default function PostCard({ post }) {
@@ -38,19 +41,30 @@ export default function PostCard({ post }) {
           <span className="date-year">{postYear}</span>
         </div>
       </div>
+      <article className="content-wrapper">
+        <div className="post-wrapper">
+          <Link to={`/posts/${post.id}`}>
+            <h3>{post.title}</h3>
+          </Link>
 
-      <div className="post-wrapper">
-        <Link to={`/posts/${post.id}`}>
-          <h3>{post.title}</h3>
-        </Link>
+          <p className="author">By {post.author.username}</p>
+          <Link to={`/posts/${post.id}`}>
+            <p className="post-text">{contentText}</p>
+          </Link>
 
-        <p className="author">By {post.author.username}</p>
-        <Link to={`/posts/${post.id}`}>
-          <p className="post-text">{contentText}</p>
-        </Link>
-      </div>
-
-      <div className="post-menu"></div>
+          <div className="post-menu">
+            <div className="like-count">
+              <img src={heart} alt="like" className="heart-icon" />
+            </div>
+            <div className="comment-count">
+              <img src={comment} alt="comment" className="comment-icon" />
+            </div>
+            <div className="view-count">
+              <img src={viewIcon} alt="view" className="view-icon" />
+            </div>
+          </div>
+        </div>
+      </article>
     </div>
   );
 }

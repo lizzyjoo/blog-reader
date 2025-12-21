@@ -1,11 +1,25 @@
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Domine:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 .postMinDiv {
   display: flex;
+  position: relative;
+}
+
+.postMinDiv::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 1px;
+  left: 125px; /* adjust this value as needed */
+  top: 25px;
+  display: block;
+  background: rgba(68, 68, 68, 0.1);
+  height: calc(100% - 120px);
 }
 
 .post-date {
   display: flex;
   flex-direction: column;
+  position: relative;
 }
 
 .post-date ::after {
@@ -15,8 +29,8 @@
   width: 12px;
   display: block;
   /* border-radius: 50%; */
-  left: 331px;
-  top: 134px;
+  left: 120px;
+  top: 38px;
   z-index: 2;
   background: #161b33;
 }
@@ -50,7 +64,17 @@
   margin-top: 7px;
 }
 
-.post-wrapper ::before {
+.post-wrapper {
+  padding-left: 140px;
+  position: relative;
+  margin-bottom: 90px;
+  padding-bottom: 100px;
+}
+.content-wrapper {
+  position: relative;
+  margin-bottom: 40px;
+}
+/* .content-wrapper::before {
   content: "";
   height: 100%;
   position: absolute;
@@ -59,15 +83,7 @@
   top: 25px;
   display: block;
   background: rgba(68, 68, 68, 0.1);
-}
-
-.post-wrapper {
-  padding-left: 140px;
-  position: relative;
-  margin-bottom: 90px;
-  padding-bottom: 100px;
-}
-
+} */
 .post-wrapper h3 {
   font-family: "Josefin Sans";
   text-transform: uppercase;
@@ -82,7 +98,7 @@
 
 .post-wrapper p {
   text-align: left;
-  padding-left: 2px;
+  /* padding-left: 2px; */
 }
 
 .post-wrapper .author {
@@ -103,4 +119,16 @@
   color: #444444;
   line-height: 30px;
   font-size: 16px;
+}
+
+.post-menu {
+  display: flex;
+  margin-top: 3em;
+}
+.post-menu img {
+  width: 30px;
+}
+
+.post-menu img :hover {
+  cursor: pointer;
 }
