@@ -9,16 +9,14 @@ export default function Header() {
       <div className="header-left">
         <div className="header-logo">URTEXT</div>
 
-        <BrowserRouter>
-          <nav className="header-nav">
-            <NavLink to="/posts" className="header-link">
-              Discover
-            </NavLink>
-            <NavLink to="/" className="header-link">
-              Subscribed
-            </NavLink>
-          </nav>
-        </BrowserRouter>
+        <nav className="header-nav">
+          <NavLink to="/posts" className="header-link">
+            Discover
+          </NavLink>
+          <NavLink to="/" className="header-link">
+            Subscribed
+          </NavLink>
+        </nav>
       </div>
       <div className="header-right"></div>
     </header>

@@ -8,6 +8,18 @@
   flex-direction: column;
 }
 
+.post-date ::after {
+  content: "";
+  position: absolute;
+  height: 12px;
+  width: 12px;
+  display: block;
+  /* border-radius: 50%; */
+  left: 331px;
+  top: 134px;
+  z-index: 2;
+  background: #161b33;
+}
 .date-day {
   font-size: 24px;
   font-weight: bold;
@@ -36,6 +48,17 @@
   font-family: "Montserrat", sans-serif;
   color: #b7b7b7;
   margin-top: 7px;
+}
+
+.post-wrapper ::before {
+  content: "";
+  height: 100%;
+  position: absolute;
+  width: 1px;
+  left: 59px;
+  top: 25px;
+  display: block;
+  background: rgba(68, 68, 68, 0.1);
 }
 
 .post-wrapper {

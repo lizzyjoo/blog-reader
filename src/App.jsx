@@ -1,5 +1,7 @@
 import "./App.css";
-import PostList from "../../blog-reader/src/components/PostList";
+import { Routes, Route } from "react-router-dom";
+import PostList from "./components/PostList";
+import PostPage from "./components/PostPage";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -12,7 +14,10 @@ function App() {
       <Header />
       <div className="outer-wrapper">
         <main className="app-content">
-          <PostList />
+          <Routes>
+            <Route path="/" element={<PostList />} />
+            <Route path="/posts/:id" element={<PostPage />} />
+          </Routes>
         </main>
       </div>
 

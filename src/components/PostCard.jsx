@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import "../styles/postcard.css";
 export default function PostCard({ post }) {
   const postContentLimit = 500;
@@ -36,11 +38,18 @@ export default function PostCard({ post }) {
           <span className="date-year">{postYear}</span>
         </div>
       </div>
+
       <div className="post-wrapper">
-        <h3>{post.title}</h3>
+        <Link to={`/posts/${post.id}`}>
+          <h3>{post.title}</h3>
+        </Link>
+
         <p className="author">By {post.author.username}</p>
-        <p className="post-text">{contentText}</p>
+        <Link to={`/posts/${post.id}`}>
+          <p className="post-text">{contentText}</p>
+        </Link>
       </div>
+
       <div className="post-menu"></div>
     </div>
   );
