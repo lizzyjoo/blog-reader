@@ -1,5 +1,6 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
+import ProtectedRoute from "./components/ProtectedRoute";
 import PostList from "./components/PostList";
 import PostPage from "./components/PostPage";
 import CreatePost from "./components/CreatePost";
@@ -20,7 +21,14 @@ function App() {
             <Route path="/posts/:id" element={<PostPage />} />
             <Route path="/posts/:id/comments" element={<PostPage />} />
             <Route path="/posts/:id/comments/:id" element={<PostPage />} />
-            <Route path="/posts/new" element={<CreatePost />} />
+            <Route
+              path="/posts/new"
+              element={
+                <ProtectedRoute>
+                  <CreatePost />
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>
