@@ -20,10 +20,23 @@ header {
 
 .header-left {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  padding-left: 3rem;
+  padding-bottom: 4rem;
 }
 
+.header-right {
+  display: flex;
+  gap: 0.5rem;
+  padding-right: 3rem;
+  padding-bottom: 4rem;
+}
+
+.header-center {
+  padding-top: 8rem;
+}
+.header-right-icon {
+  width: 2rem;
+}
 .header-nav {
   display: flex;
   gap: 1rem;
@@ -36,4 +49,14 @@ header {
   text-decoration: none;
   font-family: josefin sans, sans-serif;
   /* margin-left: 0; */
+}
+.header-nav a:hover {
+  text-decoration: underline;
+  transition: all 1.3s ease-in-out;
+}
+
+a {
+  text-decoration: none;
+  color: #ffffff;
+  font-family: josefin sans, sans-serif;
 }

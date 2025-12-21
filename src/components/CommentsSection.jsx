@@ -20,7 +20,11 @@ export default function CommentsSection({ postId }) {
         <p>No comments yet.</p>
       ) : (
         comments.map((comment) => (
-          <div className="comment-div" key={comment.id}>
+          <div
+            className="comment-div"
+            key={comment.id}
+            id={`comment-${comment.id}`}
+          >
             <p>
               <strong>{comment.author.username}:</strong> {comment.content}
             </p>

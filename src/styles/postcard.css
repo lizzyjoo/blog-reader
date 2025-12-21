@@ -64,6 +64,11 @@
   margin-top: 7px;
 }
 
+.author-username:hover {
+  cursor: pointer;
+  text-decoration: underline;
+  text-decoration-color: #333333;
+}
 .post-wrapper {
   padding-left: 140px;
   position: relative;

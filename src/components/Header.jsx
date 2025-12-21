@@ -44,13 +44,8 @@ export default function Header() {
           </Link>
         </div>
         <div>
-          <Link>
-            <img
-              src={userIcon}
-              alt="profile"
-              className="header-right-icon"
-            ></img>
-          </Link>
+          {/* want this to be a dropdown */}
+          <img src={userIcon} alt="profile" className="header-right-icon"></img>
         </div>
       </div>
     </header>

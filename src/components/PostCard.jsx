@@ -47,21 +47,34 @@ export default function PostCard({ post }) {
             <h3>{post.title}</h3>
           </Link>
 
-          <p className="author">By {post.author.username}</p>
+          <p className="author">
+            By <Link to={`/users/${post.authorId}`}></Link>
+            <span className="author-username">{post.author.username}</span>
+          </p>
+
           <Link to={`/posts/${post.id}`}>
             <p className="post-text">{contentText}</p>
           </Link>
 
           <div className="post-menu">
-            <div className="like-count">
-              <img src={heart} alt="like" className="heart-icon" />
-            </div>
-            <div className="comment-count">
-              <img src={comment} alt="comment" className="comment-icon" />
-            </div>
-            <div className="view-count">
-              <img src={viewIcon} alt="view" className="view-icon" />
-            </div>
+            <Link to={`/posts/${post.id}`}>
+              <div className="like-count">
+                <img src={heart} alt="like" className="heart-icon" />
+                <div className="like-number">{post.likes}</div>
+              </div>
+            </Link>
+            <Link>
+              <div className="comment-count">
+                <img src={comment} alt="comment" className="comment-icon" />
+                <div className="comment-number">{post.comments.length}</div>
+              </div>
+            </Link>
+            <Link>
+              <div className="view-count">
+                <img src={viewIcon} alt="view" className="view-icon" />
+                <div className="view-number">{post.views}</div>
+              </div>
+            </Link>
           </div>
         </div>
       </article>
