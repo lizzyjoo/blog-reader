@@ -2,6 +2,7 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import PostList from "./components/PostList";
 import PostPage from "./components/PostPage";
+import CreatePost from "./components/CreatePost";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -17,6 +18,9 @@ function App() {
           <Routes>
             <Route path="/" element={<PostList />} />
             <Route path="/posts/:id" element={<PostPage />} />
+            <Route path="/posts/:id/comments" element={<PostPage />} />
+            <Route path="/posts/:id/comments/:id" element={<PostPage />} />
+            <Route path="/posts/new" element={<CreatePost />} />
           </Routes>
         </main>
       </div>
