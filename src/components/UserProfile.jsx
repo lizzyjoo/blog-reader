@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { getCurrentUser } from "../api/api";
+import ProfilePostCard from "./ProfilePostCard";
+import "../styles/profile.css";
 
 export default function UserProfile() {
   const [user, setUser] = useState(null);
@@ -17,12 +19,23 @@ export default function UserProfile() {
   }
 
   return (
-    <div>
-      <h1>
-        {user.first_name} {user.last_name}
-      </h1>
-      <p>@{user.username}</p>
-      <p>{user.email}</p>
-    </div>
+    <>
+      <div>
+        <h1 className="profile-username">@{user.username}</h1>
+        <div>
+          <div>Joined</div>
+          <div>Subscribers</div>
+          <div>Posts</div>
+        </div>
+
+        <p></p>
+      </div>
+
+      <div>
+        {user.posts.map((post) => (
+          <ProfilePostCard key={post.id} post={post} />
+        ))}
+      </div>
+    </>
   );
 }

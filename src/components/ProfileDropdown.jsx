@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useRef, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import userIcon from "../assets/user.png";
@@ -7,12 +7,27 @@ import "../styles/profileDropdown.css";
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-
   const { isAuthenticated, logout } = useAuth();
-  console.log("ProfileDropdown isAuthenticated:", isAuthenticated);
+  const dropdownRef = useRef(null);
+
+  useEffect(() => {
+    function handleClickOutside(event) {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsOpen(false);
+      }
+    }
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Close dropdown on navigation
+  useEffect(() => {
+    setIsOpen(false);
+  }, [navigate]);
 
   return (
-    <div className="popup">
+    <div className="popup" ref={dropdownRef}>
       <img
         src={userIcon}
         alt="profile"
