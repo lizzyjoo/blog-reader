@@ -124,6 +124,23 @@
   color: #444444;
   line-height: 30px;
   font-size: 16px;
+  text-align: left;
+}
+
+.post-text h1 {
+  font-family: "Domine";
+  font-weight: 400;
+  color: #444444;
+  line-height: 30px;
+  font-size: 24px;
+  text-align: left;
+}
+
+.post-text p {
+  font-family: "Domine";
+  font-weight: 400;
+  color: #444444;
+  text-align: left;
 }
 
 .post-menu {

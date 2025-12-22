@@ -1,6 +1,7 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import UserProfile from "./components/UserProfile";
 import Login from "./components/Login";
 import Register from "./components/Register";
 import PostList from "./components/PostList";
@@ -33,6 +34,14 @@ function App() {
             />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route
+              path="/me"
+              element={
+                <ProtectedRoute>
+                  <UserProfile></UserProfile>
+                </ProtectedRoute>
+              }
+            />
           </Routes>
         </main>
       </div>

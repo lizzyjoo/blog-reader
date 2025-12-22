@@ -1,5 +1,5 @@
 import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
-import userIcon from "../assets/user.png";
+import ProfileDropdown from "./ProfileDropdown";
 import searchIcon from "../assets/search.png";
 import addIcon from "../assets/add.png";
 import PostList from "./PostList";
@@ -44,8 +44,7 @@ export default function Header() {
           </Link>
         </div>
         <div>
-          {/* want this to be a dropdown */}
-          <img src={userIcon} alt="profile" className="header-right-icon"></img>
+          <ProfileDropdown />
         </div>
       </div>
     </header>
