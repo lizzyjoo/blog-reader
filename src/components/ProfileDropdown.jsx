@@ -1,10 +1,16 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import userIcon from "../assets/user.png";
 import { Link } from "react-router-dom";
 import "../styles/profileDropdown.css";
 
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
+  const navigate = useNavigate();
+  function handleLogout() {
+    localStorage.removeItem("token");
+    navigate("/login");
+  }
 
   return (
     <div className="popup">
@@ -41,7 +47,7 @@ export default function ProfileDropdown() {
             </li>
             <hr />
             <li>
-              <button>
+              <button onClick={handleLogout}>
                 <span>Logout</span>
               </button>
             </li>
