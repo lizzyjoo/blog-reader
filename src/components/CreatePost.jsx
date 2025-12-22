@@ -35,7 +35,7 @@ export default function CreatePost() {
       />
       {/* TinyMCE editor would go here, setting content */}
       <Editor
-        apiKey="your-api-key"
+        apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
         onInit={(evt, editor) => (editorRef.current = editor)}
         initialValue="<p>This is the initial content of the editor.</p>"
         init={{

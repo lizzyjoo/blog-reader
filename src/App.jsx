@@ -1,6 +1,8 @@
 import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import ProtectedRoute from "./components/ProtectedRoute";
+import Login from "./components/Login";
+import Register from "./components/Register";
 import PostList from "./components/PostList";
 import PostPage from "./components/PostPage";
 import CreatePost from "./components/CreatePost";
@@ -29,6 +31,8 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
         </main>
       </div>
