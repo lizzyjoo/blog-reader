@@ -60,12 +60,16 @@ export default function CreatePost() {
             "code",
             "help",
             "wordcount",
+            "autosave",
           ],
           toolbar:
             "undo redo | blocks | " +
             "bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | " +
             "removeformat | help",
+          autosave_interval: "30s",
+          autosave_prefix: "tinymce-autosave-{path}{query}-{id}-",
+          autosave_restore_when_empty: true,
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}

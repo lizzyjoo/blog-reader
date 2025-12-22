@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import DOMPurify from "dompurify";
 import heart from "../assets/heart.png";
 import comment from "../assets/commentIcon.png";
 import viewIcon from "../assets/viewIcon.png";
@@ -53,7 +54,13 @@ export default function PostCard({ post }) {
           </p>
 
           <Link to={`/posts/${post.id}`}>
-            <p className="post-text">{contentText}</p>
+            <div
+              className="post-text"
+              dangerouslySetInnerHTML={{
+                __html: DOMPurify.sanitize(contentText),
+              }}
+            />
+            {/* <p className="post-text">{contentText}</p> */}
           </Link>
 
           <div className="post-menu">

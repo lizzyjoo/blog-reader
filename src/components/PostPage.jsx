@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useLocation } from "react-router-dom";
+import DOMPurify from "dompurify";
 import { getPostById } from "../api/api";
 import CommentsSection from "./CommentsSection";
 import NotFound from "../pages/NotFound";
@@ -50,7 +51,9 @@ export default function PostPage() {
       <div className="post-content" key={id}>
         <h3>{post.title}</h3>
         <p>by {post.author.username}</p>
-        <p>{post.content}</p>
+        <div
+          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
+        />
       </div>
       <div ref={commentSectionRef}>
         <CommentsSection comments={post.comments} />
