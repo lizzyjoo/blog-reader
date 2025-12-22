@@ -8,6 +8,20 @@ export async function getPosts() {
   return data;
 }
 
+export async function getCurrentUser() {
+  const token = localStorage.getItem("token");
+
+  const response = await fetch(`${base_URL}/users/me`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+
+  const data = await response.json();
+
+  return data;
+}
+
 export async function getPostById(id) {
   const response = await fetch(`${base_URL}/posts/${id}`);
   const data = await response.json();

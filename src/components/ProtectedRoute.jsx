@@ -1,28 +1,26 @@
-// ProtectedRoute.jsx
-import { Navigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 import { jwtDecode } from "jwt-decode";
+import { Navigate } from "react-router-dom";
 
 export default function ProtectedRoute({ children }) {
-  // children is createpost component
-  // token has header.payload.signature
-  const token = localStorage.getItem("token"); // jwt token saved in local storage
-
+  const { logout } = useAuth();
+  const token = localStorage.getItem("token");
   if (!token) {
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" replace />;
   }
 
   try {
-    // check if token has expired
     const payload = jwtDecode(token);
     const now = Date.now() / 1000;
+
     if (payload.exp < now) {
-      localStorage.removeItem("token");
-      return <Navigate to="/login" />;
+      logout();
+      return <Navigate to="/login" replace />;
     }
   } catch {
-    localStorage.removeItem("token");
-    return <Navigate to="/login" />;
+    logout();
+    return <Navigate to="/login" replace />;
   }
 
-  return children; // render the protected component
+  return children;
 }
