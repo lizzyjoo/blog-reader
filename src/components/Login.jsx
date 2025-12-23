@@ -26,7 +26,7 @@ export default function Login() {
         throw new Error(data.error || "Login failed");
       }
 
-      login(data.token);
+      login(data.token); // authcontext state update, all other components will re-render
 
       navigate("/");
     } catch (err) {
