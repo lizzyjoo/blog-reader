@@ -3,6 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Login() {
+  // eslint-disable-next-line no-unused-vars
   const { login, isAuthenticated } = useAuth();
   const [error, setError] = useState(null);
   const navigate = useNavigate();
