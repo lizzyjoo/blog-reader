@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCurrentUser } from "../api/api";
 import ProfilePostCard from "./ProfilePostCard";
+import SubscriptionPage from "./SubscriptionPage";
 import "../styles/profile.css";
 
 export default function UserProfile() {
@@ -9,6 +10,27 @@ export default function UserProfile() {
   // if no id in the url, we are viewing our own profile
   const isOwnProfile = !id;
   const [user, setUser] = useState(null);
+  // use state to check which menu is selected: posts (default), subscribed,
+  const [activeMenu, setActiveMenu] = useState("posts");
+  const handleMenuClick = (menuItem) => {
+    setActiveMenu(menuItem);
+  };
+  const renderComponent = () => {
+    switch (activeMenu) {
+      case "posts":
+        return (
+          <div>
+            {user.posts.map((post) => (
+              <ProfilePostCard key={post.id} post={post} />
+            ))}
+          </div>
+        );
+      case "subscribed":
+        return <SubscriptionPage />;
+      default:
+        return null;
+    }
+  };
 
   useEffect(() => {
     async function fetchUser() {
@@ -17,9 +39,7 @@ export default function UserProfile() {
         setUser(userData);
       } else {
         const response = await fetch(`http://localhost:3000/users/${id}`);
-        console.log("huhguhgh", response);
         const userData = await response.json();
-        console.log("USERDATA", userData);
         setUser(userData);
       }
     }
@@ -35,19 +55,23 @@ export default function UserProfile() {
       <div>
         <h1 className="profile-username">@{user.username}</h1>
         <div>
-          <div>Joined</div>
-          <div>Subscribers</div>
-          <div>Posts</div>
+          <div>Joined{user.registeredDate}</div>
+          <div>Posts{user.posts.length}</div>
+          <div>Subscribers{user.registeredDate}</div>
+          <button onClick={() => handleMenuClick("posts")}>Posts</button>
+          <button onClick={() => handleMenuClick("subscribed")}>
+            Subscribed{user.subscribers}
+          </button>
         </div>
 
         <p></p>
       </div>
-
       <div>
-        {user.posts.map((post) => (
-          <ProfilePostCard key={post.id} post={post} />
-        ))}
+        sort tabs come here, recent, most liked, most commented, most saved,
+        most viewed{" "}
       </div>
+
+      <main>{renderComponent()}</main>
     </>
   );
 }
