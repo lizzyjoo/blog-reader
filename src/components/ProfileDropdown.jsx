@@ -7,7 +7,7 @@ import "../styles/profileDropdown.css";
 export default function ProfileDropdown() {
   const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
-  const { isAuthenticated, logout } = useAuth();
+  const { isAuthenticated, user, logout } = useAuth();
   const dropdownRef = useRef(null);
 
   useEffect(() => {
@@ -39,8 +39,8 @@ export default function ProfileDropdown() {
         <nav className="popup-window open">
           <ul>
             <li>
-              <button>
-                <span>My Feed</span>
+              <button onClick={() => navigate(`/users/${user.id}/posts`)}>
+                <span>My Page</span>
               </button>
             </li>
 
@@ -59,7 +59,7 @@ export default function ProfileDropdown() {
             )}
 
             <li>
-              <button>
+              <button onClick={() => navigate("/settings")}>
                 <span>Settings</span>
               </button>
             </li>
