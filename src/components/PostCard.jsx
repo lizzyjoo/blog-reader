@@ -1,9 +1,12 @@
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { useAuth } from "../context/AuthContext";
+
 import heart from "../assets/heart.png";
 import comment from "../assets/commentIcon.png";
 import viewIcon from "../assets/viewIcon.png";
-
+// somehow need to check if currently logged in user tries to view their own profile
+// if so, go to /me instead of user route
 import "../styles/postcard.css";
 export default function PostCard({ post }) {
   const postContentLimit = 500;
@@ -31,6 +34,25 @@ export default function PostCard({ post }) {
   const postMonthNum = post.created_at.split("-")[1];
   const postMonth = months[postMonthNum - 1];
   const postYear = post.created_at.split("-")[0];
+  const { isAuthenticated, user } = useAuth();
+
+  async function checkLogin(event) {
+    event.preventDefault();
+    try {
+      // compare the user/:id from param with the current user id
+      // if they match, redirect to /me
+      // if they don't match, redirect to /users/:id
+      if (isAuthenticated) {
+        if (post.authorId === user.id) {
+          window.location.href = "/me";
+        } else {
+          window.location.href = `/users/${post.authorId}`;
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
   return (
     <div className="postMinDiv">
@@ -48,7 +70,7 @@ export default function PostCard({ post }) {
             <h3>{post.title}</h3>
           </Link>
 
-          <p className="author">
+          <p className="author" onClick={checkLogin}>
             By <Link to={`/users/${post.authorId}`}></Link>
             <span className="author-username">{post.author.username}</span>
           </p>
