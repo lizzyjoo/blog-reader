@@ -6,7 +6,9 @@ import Login from "./components/Login";
 import Register from "./components/Register";
 import PostList from "./components/PostList";
 import PostPage from "./components/PostPage";
+import AuthorPostList from "./components/AuthorPostList";
 import CreatePost from "./components/CreatePost";
+import Settings from "./components/Settings";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -47,6 +49,15 @@ function App() {
               element={
                 <ProtectedRoute>
                   <UserProfile></UserProfile>
+                </ProtectedRoute>
+              }
+            />
+            <Route path="/users/:id/posts" element={<AuthorPostList />} />
+            <Route
+              path="/settings"
+              element={
+                <ProtectedRoute>
+                  <Settings></Settings>
                 </ProtectedRoute>
               }
             />
