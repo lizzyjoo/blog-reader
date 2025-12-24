@@ -9,6 +9,7 @@ import PostPage from "./components/PostPage";
 import AuthorPostList from "./components/AuthorPostList";
 import CreatePost from "./components/CreatePost";
 import Settings from "./components/Settings";
+import SavedPosts from "./components/SavedPosts";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 
@@ -58,6 +59,14 @@ function App() {
               element={
                 <ProtectedRoute>
                   <Settings></Settings>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/users/:id/saved"
+              element={
+                <ProtectedRoute>
+                  <SavedPosts />
                 </ProtectedRoute>
               }
             />
