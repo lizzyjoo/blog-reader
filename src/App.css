@@ -5,7 +5,9 @@
   text-align: center;
   width: 100%;
 }
-
+a {
+  text-decoration: none;
+}
 .app-wrapper {
   display: flex;
   flex-direction: column;

@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import "../styles/register.css";
 
 //need to check if users are already looged in, if so redirect to home page
 // handle for if user email already exists
