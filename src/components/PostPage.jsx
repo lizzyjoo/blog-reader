@@ -56,7 +56,7 @@ export default function PostPage() {
         />
       </div>
       <div ref={commentSectionRef}>
-        <CommentsSection comments={post.comments} />
+        <CommentsSection postId={post.id} />
       </div>
     </div>
   );
