@@ -39,7 +39,7 @@ export default function ProfileDropdown() {
         <nav className="popup-window open">
           <ul>
             <li>
-              <button onClick={() => navigate(`/users/${user.id}/posts`)}>
+              <button onClick={() => navigate(`/users/${user.username}/posts`)}>
                 <span>My Page</span>
               </button>
             </li>
