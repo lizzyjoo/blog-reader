@@ -3,12 +3,13 @@ import { useParams } from "react-router-dom";
 import { getCurrentUser } from "../api/api";
 import ProfilePostCard from "./ProfilePostCard";
 import SubscriptionPage from "./SubscriptionPage";
+import FollowButton from "./FollowButton";
 import "../styles/profile.css";
 
 export default function UserProfile() {
-  const { id } = useParams();
+  const { username } = useParams();
   // if no id in the url, we are viewing our own profile
-  const isOwnProfile = !id;
+  const isOwnProfile = !username;
   const [user, setUser] = useState(null);
   // use state to check which menu is selected: posts (default), subscribed,
   const [activeMenu, setActiveMenu] = useState("posts");
@@ -38,13 +39,13 @@ export default function UserProfile() {
         const userData = await getCurrentUser();
         setUser(userData);
       } else {
-        const response = await fetch(`http://localhost:3000/users/${id}`);
+        const response = await fetch(`http://localhost:3000/users/${username}`);
         const userData = await response.json();
         setUser(userData);
       }
     }
     fetchUser();
-  }, [id, isOwnProfile]);
+  }, [username, isOwnProfile]);
 
   if (!user) {
     return <div>Loading...</div>;
@@ -54,6 +55,7 @@ export default function UserProfile() {
     <>
       <div>
         <h1 className="profile-username">@{user.username}</h1>
+        {!isOwnProfile && <FollowButton username={user.username} />}
         <div>
           <div>Joined{user.registeredDate}</div>
           <div>Posts{user.posts.length}</div>

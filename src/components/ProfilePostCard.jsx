@@ -63,7 +63,7 @@ export default function ProfilePostCard({ post }) {
                 <div className="like-number">{post.likes}</div>
               </div>
             </Link>
-            <Link>
+            <Link to={`/posts/${post.id}`}>
               <div className="comment-count">
                 <img src={comment} alt="comment" className="comment-icon" />
                 <div className="comment-number">{post.comments.length}</div>
