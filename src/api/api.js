@@ -8,6 +8,20 @@ export async function getPosts() {
   return data;
 }
 
+export async function getpublishedPosts() {
+  const response = await fetch(`${base_URL}/posts?published=true`);
+  const data = response.json();
+  return data;
+}
+
+export async function getMyDrafts(token) {
+  const response = await fetch(`${base_URL}/posts?published=false`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  const data = response.json();
+  return data;
+}
+
 export async function getCurrentUser() {
   const token = localStorage.getItem("token");
 
@@ -64,4 +78,40 @@ export async function getUserPosts(id) {
   const response = await fetch(`${base_URL}/users/${id}/posts`);
   const data = await response.json();
   return data;
+}
+
+export async function followUser(username, token) {
+  const response = await fetch(`${base_URL}/users/${username}/follow`, {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+}
+
+export async function unfollowUser(username, token) {
+  const response = await fetch(`${base_URL}/users/${username}/follow`, {
+    method: "DELETE",
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+}
+
+export async function checkFollowing(username, token) {
+  const response = await fetch(`${base_URL}/users/${username}/follow`, {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  });
+  return response.json();
+}
+
+export async function searchPosts(query) {
+  const response = await fetch(
+    `${base_URL}/posts/search?q=${encodeURIComponent(query)}`
+  );
+  return response.json();
 }
