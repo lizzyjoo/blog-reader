@@ -5,17 +5,17 @@ import { useAuth } from "../context/AuthContext";
 import heart from "../assets/heart.png";
 import comment from "../assets/commentIcon.png";
 import viewIcon from "../assets/viewIcon.png";
-// somehow need to check if currently logged in user tries to view their own profile
-// if so, go to /me instead of user route
 import "../styles/postcard.css";
+
 export default function PostCard({ post }) {
+  const { user } = useAuth();
+
   const postContentLimit = 500;
-  let contentText = "";
-  if (post.content.length > postContentLimit) {
-    contentText = post.content.slice(0, postContentLimit) + " ...";
-  } else {
-    contentText = post.content;
-  }
+  const contentText =
+    post.content.length > postContentLimit
+      ? post.content.slice(0, postContentLimit) + " ..."
+      : post.content;
+
   const months = [
     "JAN",
     "FEB",
@@ -31,28 +31,12 @@ export default function PostCard({ post }) {
     "DEC",
   ];
   const postDay = post.created_at.split("-")[2].split("T")[0];
-  const postMonthNum = post.created_at.split("-")[1];
-  const postMonth = months[postMonthNum - 1];
+  const postMonth = months[Number(post.created_at.split("-")[1]) - 1];
   const postYear = post.created_at.split("-")[0];
-  const { isAuthenticated, user } = useAuth();
 
-  async function checkLogin(event) {
-    event.preventDefault();
-    try {
-      // compare the user/:id from param with the current user id
-      // if they match, redirect to /me
-      // if they don't match, redirect to /users/:id
-      if (isAuthenticated) {
-        if (post.authorId === user.id) {
-          window.location.href = "/me";
-        } else {
-          window.location.href = `/users/${post.authorId}`;
-        }
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  }
+  // If viewing own post, link to /me, otherwise /users/:username
+  const authorLink =
+    user?.id === post.author.id ? "/me" : `/users/${post.author.username}`;
 
   return (
     <div className="postMinDiv">
@@ -70,9 +54,8 @@ export default function PostCard({ post }) {
             <h3>{post.title}</h3>
           </Link>
 
-          <p className="author" onClick={checkLogin}>
-            By <Link to={`/users/${post.authorId}`}></Link>
-            <span className="author-username">{post.author.username}</span>
+          <p className="author">
+            By <Link to={authorLink}>{post.author.username}</Link>
           </p>
 
           <Link to={`/posts/${post.id}`}>
@@ -82,7 +65,6 @@ export default function PostCard({ post }) {
                 __html: DOMPurify.sanitize(contentText),
               }}
             />
-            {/* <p className="post-text">{contentText}</p> */}
           </Link>
 
           <div className="post-menu">
@@ -92,13 +74,13 @@ export default function PostCard({ post }) {
                 <div className="like-number">{post.likes}</div>
               </div>
             </Link>
-            <Link>
+            <Link to={`/posts/${post.id}`}>
               <div className="comment-count">
                 <img src={comment} alt="comment" className="comment-icon" />
                 <div className="comment-number">{post.comments.length}</div>
               </div>
             </Link>
-            <Link>
+            <Link to={`/posts/${post.id}`}>
               <div className="view-count">
                 <img src={viewIcon} alt="view" className="view-icon" />
                 <div className="view-number">{post.views}</div>
