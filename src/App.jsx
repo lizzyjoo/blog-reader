@@ -46,14 +46,14 @@ function App() {
               }
             />
             <Route
-              path="/users/:id"
+              path="/users/:username"
               element={
                 <ProtectedRoute>
                   <UserProfile></UserProfile>
                 </ProtectedRoute>
               }
             />
-            <Route path="/users/:id/posts" element={<AuthorPostList />} />
+            <Route path="/users/:username/posts" element={<AuthorPostList />} />
             <Route
               path="/settings"
               element={
@@ -63,13 +63,14 @@ function App() {
               }
             />
             <Route
-              path="/users/:id/saved"
+              path="/users/:username/saved"
               element={
                 <ProtectedRoute>
                   <SavedPosts />
                 </ProtectedRoute>
               }
             />
+            <Route path="/comments" />
           </Routes>
         </main>
       </div>
