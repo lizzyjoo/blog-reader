@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import OAuthButtons from "./OAuthButtons";
 import "../styles/login.css";
 
 export default function Login() {
@@ -72,6 +73,7 @@ export default function Login() {
           />
         </div>
         <button type="submit">Login</button>
+        <OAuthButtons />
         <div>
           Don't have an account? <Link to="/register">Register</Link>
         </div>

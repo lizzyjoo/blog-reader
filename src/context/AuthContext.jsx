@@ -16,7 +16,11 @@ export function AuthProvider({ children }) {
         // check if expired
         if (decoded.exp * 1000 > Date.now()) {
           setIsAuthenticated(true);
-          setUser({ id: decoded.id, username: decoded.username });
+          setUser({
+            id: decoded.id,
+            username: decoded.username,
+            isAdmin: decoded.isAdmin,
+          });
         } else {
           localStorage.removeItem("token");
         }
@@ -29,7 +33,11 @@ export function AuthProvider({ children }) {
   const login = (token) => {
     localStorage.setItem("token", token);
     const decoded = jwtDecode(token);
-    setUser({ id: decoded.id, username: decoded.username });
+    setUser({
+      id: decoded.id,
+      username: decoded.username,
+      isAdmin: decoded.isAdmin,
+    });
     setIsAuthenticated(true);
   };
 

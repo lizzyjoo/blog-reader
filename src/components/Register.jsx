@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import OAuthButtons from "./OAuthButtons";
 import "../styles/register.css";
 
 //need to check if users are already looged in, if so redirect to home page
@@ -68,7 +69,6 @@ export default function Register() {
           required
           autoComplete="username"
         />
-
         <label htmlFor="email">email</label>
         <input
           type="email"
@@ -86,6 +86,7 @@ export default function Register() {
           autoComplete="new-password"
         />
         <button type="submit">Register</button>
+        <OAuthButtons />
         <div>
           Already have an account? <Link to="/login">Login</Link>
         </div>
