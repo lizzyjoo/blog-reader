@@ -3,6 +3,7 @@ import ProfileDropdown from "./ProfileDropdown";
 import searchIcon from "../assets/search.png";
 import addIcon from "../assets/add.png";
 import PostList from "./PostList";
+import SearchBar from "./SearchBar";
 import "../styles/header.css";
 import { NavLink } from "react-router-dom";
 
@@ -25,14 +26,9 @@ export default function Header() {
         </nav>
       </div>
       <div className="header-right">
-        <div>
-          <Link>
-            <img
-              src={searchIcon}
-              alt="search"
-              className="header-right-icon"
-            ></img>
-          </Link>
+        <div className="search-container">
+          <img src={searchIcon} alt="search" className="header-right-icon" />
+          <SearchBar />
         </div>
         <div>
           <Link to="/posts/new">
