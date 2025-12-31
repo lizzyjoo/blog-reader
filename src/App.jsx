@@ -10,8 +10,11 @@ import AuthorPostList from "./components/AuthorPostList";
 import CreatePost from "./components/CreatePost";
 import Settings from "./components/Settings";
 import SavedPosts from "./components/SavedPosts";
+import SearchResults from "./components/SearchResults";
+import EditPost from "./components/EditPost";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import AuthCallback from "./pages/AuthCallback";
 
 function App() {
   // const [count, setCount] = useState(0);
@@ -23,10 +26,24 @@ function App() {
       <div className="outer-wrapper">
         <main className="app-content">
           <Routes>
+            {/* Blog main home page */}
             <Route path="/" element={<PostList />} />
+            {/* Specific post */}
             <Route path="/posts/:id" element={<PostPage />} />
+            {/* Editing a post: protected */}
+            <Route
+              path="/posts/:id/edit"
+              element={
+                <ProtectedRoute>
+                  <EditPost />
+                </ProtectedRoute>
+              }
+            />
+            {/* Comment Section of a post */}
             <Route path="/posts/:id/comments" element={<PostPage />} />
+            {/* Specific comment of a post */}
             <Route path="/posts/:id/comments/:id" element={<PostPage />} />
+            {/* Creating a new post: protected */}
             <Route
               path="/posts/new"
               element={
@@ -36,7 +53,10 @@ function App() {
               }
             />
             <Route path="/login" element={<Login />} />
+            {/* 3rd party login callback */}
+            <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/register" element={<Register />} />
+            {/* User's Own Profile Page */}
             <Route
               path="/me"
               element={
@@ -45,15 +65,21 @@ function App() {
                 </ProtectedRoute>
               }
             />
+            {/* User Saved Posts */}
             <Route
-              path="/users/:username"
+              path="/saved"
               element={
                 <ProtectedRoute>
-                  <UserProfile></UserProfile>
+                  <SavedPosts></SavedPosts>
                 </ProtectedRoute>
               }
             />
-            <Route path="/users/:username/posts" element={<AuthorPostList />} />
+            <Route path="/users/:username/home" element={<AuthorPostList />} />
+            {/* User Profile Page, anyone can view; authcontext for author specific op*/}
+            <Route
+              path="/users/:username"
+              element={<UserProfile></UserProfile>}
+            />
             <Route
               path="/settings"
               element={
@@ -62,15 +88,7 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route
-              path="/users/:username/saved"
-              element={
-                <ProtectedRoute>
-                  <SavedPosts />
-                </ProtectedRoute>
-              }
-            />
-            <Route path="/comments" />
+            <Route path="/search" element={<SearchResults />} />
           </Routes>
         </main>
       </div>

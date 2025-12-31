@@ -2,12 +2,23 @@
 
 const base_URL = "http://localhost:3000";
 
-export async function getPosts() {
-  const response = await fetch(`${base_URL}/posts`);
-  const data = await response.json();
-  return data;
+export async function getPosts(
+  sort = "recent",
+  authorId = null,
+  filter = null
+) {
+  let url = `${base_URL}/posts?sort=${sort}`;
+  if (authorId) url += `&authorId=${authorId}`;
+  if (filter) url += `&filter=${filter}`;
+
+  const token = localStorage.getItem("token");
+  const response = await fetch(url, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  return response.json();
 }
 
+export async function getSavedPosts() {}
 export async function getpublishedPosts() {
   const response = await fetch(`${base_URL}/posts?published=true`);
   const data = response.json();
@@ -113,5 +124,67 @@ export async function searchPosts(query) {
   const response = await fetch(
     `${base_URL}/posts/search?q=${encodeURIComponent(query)}`
   );
+  return response.json();
+}
+
+export async function trashPost(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/trash`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}
+
+export async function restorePost(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/restore`, {
+    method: "PUT",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}
+
+export async function viewPost(postId) {
+  const response = await fetch(`${base_URL}/posts/${postId}/view`, {
+    method: "POST",
+  });
+  return response.json();
+}
+
+export async function likePost(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/like`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}
+
+export async function unlikePost(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/like`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}
+
+export async function savePost(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/save`, {
+    method: "POST",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}
+
+export async function unsavePost(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/save`, {
+    method: "DELETE",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+  return response.json();
+}
+
+export async function getPostStatus(postId, token) {
+  const response = await fetch(`${base_URL}/posts/${postId}/status`, {
+    headers: { Authorization: `Bearer ${token}` },
+  });
   return response.json();
 }

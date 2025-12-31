@@ -1,17 +1,24 @@
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
+import { trashPost, restorePost } from "../api/api";
 import heart from "../assets/heart.png";
 import comment from "../assets/commentIcon.png";
 import viewIcon from "../assets/viewIcon.png";
 
-export default function ProfilePostCard({ post }) {
+export default function ProfilePostCard({
+  post,
+  isOwnProfile,
+  isTrashView,
+  onPostUpdate,
+}) {
+  const token = localStorage.getItem("token");
+
   const postContentLimit = 500;
-  let contentText = "";
-  if (post.content.length > postContentLimit) {
-    contentText = post.content.slice(0, postContentLimit) + " ...";
-  } else {
-    contentText = post.content;
-  }
+  const contentText =
+    post.content.length > postContentLimit
+      ? post.content.slice(0, postContentLimit) + " ..."
+      : post.content;
+
   const months = [
     "JAN",
     "FEB",
@@ -27,9 +34,21 @@ export default function ProfilePostCard({ post }) {
     "DEC",
   ];
   const postDay = post.created_at.split("-")[2].split("T")[0];
-  const postMonthNum = post.created_at.split("-")[1];
-  const postMonth = months[postMonthNum - 1];
+  const postMonth = months[Number(post.created_at.split("-")[1]) - 1];
   const postYear = post.created_at.split("-")[0];
+
+  async function handleTrash() {
+    await trashPost(post.id, token);
+    onPostUpdate();
+    window.location.reload();
+  }
+
+  async function handleRestore() {
+    await restorePost(post.id, token);
+    onPostUpdate();
+    window.location.reload();
+  }
+
   return (
     <div className="postMinDiv">
       <div className="post-date">
@@ -46,6 +65,13 @@ export default function ProfilePostCard({ post }) {
             <h3>{post.title}</h3>
           </Link>
 
+          {isOwnProfile && (
+            <div className="post-status">
+              {post.published ? "Published" : "Draft"}
+              {post.trashedAt && " • Trashed"}
+            </div>
+          )}
+
           <Link to={`/posts/${post.id}`}>
             <div
               className="post-text"
@@ -53,7 +79,6 @@ export default function ProfilePostCard({ post }) {
                 __html: DOMPurify.sanitize(contentText),
               }}
             />
-            {/* <p className="post-text">{contentText}</p> */}
           </Link>
 
           <div className="post-menu">
@@ -66,15 +91,29 @@ export default function ProfilePostCard({ post }) {
             <Link to={`/posts/${post.id}`}>
               <div className="comment-count">
                 <img src={comment} alt="comment" className="comment-icon" />
-                <div className="comment-number">{post.comments.length}</div>
+                <div className="comment-number">
+                  {post.comments?.length || 0}
+                </div>
               </div>
             </Link>
-            <Link>
-              <div className="view-count">
-                <img src={viewIcon} alt="view" className="view-icon" />
-                <div className="view-number">{post.views}</div>
+            <div className="view-count">
+              <img src={viewIcon} alt="view" className="view-icon" />
+              <div className="view-number">{post.views}</div>
+            </div>
+
+            {isOwnProfile && (
+              <div className="post-actions">
+                {isTrashView ? (
+                  <button onClick={handleRestore} className="restore-btn">
+                    Restore
+                  </button>
+                ) : (
+                  <button onClick={handleTrash} className="trash-btn">
+                    Trash
+                  </button>
+                )}
               </div>
-            </Link>
+            )}
           </div>
         </div>
       </article>

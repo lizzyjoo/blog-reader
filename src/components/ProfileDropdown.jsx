@@ -39,13 +39,15 @@ export default function ProfileDropdown() {
         <nav className="popup-window open">
           <ul>
             <li>
-              <button onClick={() => navigate(`/users/${user.username}/posts`)}>
+              <button
+                onClick={() => navigate(`/users/${user?.username}/posts`)}
+              >
                 <span>My Page</span>
               </button>
             </li>
 
             <li>
-              <button>
+              <button onClick={() => navigate(`/saved`)}>
                 <span>Saved</span>
               </button>
             </li>
@@ -63,6 +65,19 @@ export default function ProfileDropdown() {
                 <span>Settings</span>
               </button>
             </li>
+            {user?.isAdmin && (
+              <>
+                <div className="dropdown-divider"></div>
+                <a
+                  href="http://localhost:5174" //
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="admin-link"
+                >
+                  Admin Dashboard
+                </a>
+              </>
+            )}
 
             <li className="divider">
               <hr />
