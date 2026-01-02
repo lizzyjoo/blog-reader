@@ -53,7 +53,7 @@ export async function getPostById(id) {
   return data;
 }
 
-export async function createPost({ title, content }) {
+export async function createPost({ title, content, published }) {
   const token = localStorage.getItem("token");
   const response = await fetch(`${base_URL}/posts`, {
     method: "POST",
@@ -61,12 +61,23 @@ export async function createPost({ title, content }) {
       "Content-Type": "application/json",
       Authorization: `Bearer ${token}`,
     },
-    body: JSON.stringify({ title, content }),
+    body: JSON.stringify({ title, content, published }),
   });
   const data = await response.json();
   return data;
 }
-
+export async function updatePost(id, { title, content, published }) {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${base_URL}/posts/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    body: JSON.stringify({ title, content, published }),
+  });
+  return response.json();
+}
 export async function getComments() {
   const response = await fetch(`${base_URL}/comments`);
   const data = await response.json();
