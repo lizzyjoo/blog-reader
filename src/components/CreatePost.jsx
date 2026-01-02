@@ -1,12 +1,3 @@
-//Fields: title, content
-
-// On submit → POST request to /posts endpoint with JWT for authentication
-
-// Optionally, include a published checkbox for draft vs public post
-
-// After successful creation → redirect to PostPage
-
-// CreatePost.jsx
 import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../api/api";
@@ -14,30 +5,37 @@ import { Editor } from "@tinymce/tinymce-react";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
+  const [saving, setSaving] = useState(false);
   const navigate = useNavigate();
   const editorRef = useRef(null);
 
-  async function handleSubmit(e) {
-    e.preventDefault();
+  async function handleSave(shouldPublish) {
+    setSaving(true);
     const content = editorRef.current.getContent();
-    const newPost = await createPost({ title, content });
+    const newPost = await createPost({
+      title,
+      content,
+      published: shouldPublish,
+    });
+    setSaving(false);
+
     if (newPost.id) {
-      navigate(`/posts/${newPost.id}`); // redirect to the new post
+      navigate(`/posts/${newPost.id}`);
     }
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => e.preventDefault()}>
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
       />
-      {/* TinyMCE editor would go here, setting content */}
+
       <Editor
         apiKey={import.meta.env.VITE_TINYMCE_API_KEY}
+        id="create-post-editor"
         onInit={(evt, editor) => (editorRef.current = editor)}
-        initialValue="<p>This is the initial content of the editor.</p>"
         init={{
           height: 500,
           menubar: false,
@@ -57,25 +55,38 @@ export default function CreatePost() {
             "insertdatetime",
             "media",
             "table",
-            "code",
             "help",
             "wordcount",
             "autosave",
           ],
-          toolbar:
-            "undo redo | blocks | " +
-            "bold italic forecolor | alignleft aligncenter " +
-            "alignright alignjustify | bullist numlist outdent indent | " +
-            "removeformat | help",
-          autosave_interval: "30s",
-          autosave_prefix: "tinymce-autosave-{path}{query}-{id}-",
           autosave_restore_when_empty: true,
+          autosave_ask_before_unload: true,
+          autosave_interval: "30s",
+          autosave_retention: "1440m", // Keep for 24 hours
+          toolbar:
+            "restoredraft | undo redo | blocks | bold italic forecolor | alignleft aligncenter " +
+            "alignright alignjustify | bullist numlist outdent indent | removeformat | help",
           content_style:
             "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
         }}
       />
-      <button type="submit">Publish</button>
-      {/* <button type="submit">Save</button> */}
+
+      <div className="form-actions">
+        <button
+          type="button"
+          onClick={() => handleSave(false)}
+          disabled={saving}
+        >
+          Save as Draft
+        </button>
+        <button
+          type="button"
+          onClick={() => handleSave(true)}
+          disabled={saving}
+        >
+          Publish
+        </button>
+      </div>
     </form>
   );
 }
