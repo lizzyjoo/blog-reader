@@ -7,6 +7,7 @@ import { useState } from "react";
 export default function ChangePassword() {
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+
   async function handlePasswordChange(event) {
     event.preventDefault();
 
