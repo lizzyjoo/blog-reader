@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { useParams } from "react-router-dom";
-import { getCurrentUser, getPosts } from "../api/api";
+import { useParams, Link } from "react-router-dom";
+import { getCurrentUser } from "../api/api";
 import { useAuth } from "../context/AuthContext";
+import NotFound from "../pages/NotFound";
 import ProfilePostCard from "./ProfilePostCard";
 import SubscriptionPage from "./SubscriptionPage";
 import FollowButton from "./FollowButton";
@@ -13,22 +14,13 @@ export default function UserProfile() {
   const isOwnProfile = !username || currentUser?.username === username;
 
   const [user, setUser] = useState(null);
-  const [posts, setPosts] = useState([]);
+  const [notFound, setNotFound] = useState(false);
   const [activeMenu, setActiveMenu] = useState("posts");
-  const [sortBy, setSortBy] = useState("recent");
-
-  const sortOptions = [
-    { value: "recent", label: "Recent" },
-    { value: "likes", label: "Most Liked" },
-    { value: "comments", label: "Most Commented" },
-    { value: "views", label: "Most Viewed" },
-  ];
 
   useEffect(() => {
     async function fetchUser() {
       if (isOwnProfile && !username) {
         const userData = await getCurrentUser();
-        console.log("User data:", userData);
         setUser(userData);
       } else {
         const response = await fetch(
@@ -37,47 +29,35 @@ export default function UserProfile() {
           }/profile`
         );
         const userData = await response.json();
+        if (response.status === 404) {
+          setNotFound(true);
+          return;
+        }
         setUser(userData);
       }
     }
     fetchUser();
   }, [username, isOwnProfile, currentUser]);
 
-  useEffect(() => {
-    async function fetchPosts() {
-      if (!user) return;
-      const data = await getPosts(sortBy, user.id, "published");
-      setPosts(data);
-    }
-    fetchPosts();
-  }, [user, sortBy]);
-
   const renderComponent = () => {
     switch (activeMenu) {
       case "posts":
         return (
           <div>
-            <div className="sort-tabs">
-              {sortOptions.map((option) => (
-                <button
-                  key={option.value}
-                  className={sortBy === option.value ? "active" : ""}
-                  onClick={() => setSortBy(option.value)}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-
             <div className="posts-list">
-              {posts.length === 0 ? (
+              {user.posts.length === 0 ? (
                 <p>No posts found.</p>
               ) : (
-                posts.map((post) => (
+                user.posts.map((post) => (
                   <ProfilePostCard key={post.id} post={post} />
                 ))
               )}
             </div>
+            {user._count.posts > 3 && (
+              <Link to={`/users/${user.username}`} className="view-all-link">
+                View all {user._count.posts} posts →
+              </Link>
+            )}
           </div>
         );
       case "subscribed":
@@ -90,6 +70,7 @@ export default function UserProfile() {
   if (!user) {
     return <div>Loading...</div>;
   }
+  if (notFound) return <NotFound />;
 
   const registeredDate = user.registeredDate;
   const months = [
@@ -119,7 +100,7 @@ export default function UserProfile() {
           <div>
             Joined {registeMonth} {registerDay}, {registerYear}
           </div>
-          <div>Posts {user.posts?.length || 0}</div>
+          <div>Posts {user._count?.posts || 0}</div>
           <div>Subscribers {user._count?.subscribers || 0}</div>
           <button
             className={activeMenu === "posts" ? "active" : ""}
