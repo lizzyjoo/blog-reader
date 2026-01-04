@@ -1,13 +1,16 @@
-import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+// Header.jsx
+import { Link } from "react-router-dom";
 import ProfileDropdown from "./ProfileDropdown";
 import searchIcon from "../assets/search.png";
 import addIcon from "../assets/add.png";
-import PostList from "./PostList";
 import SearchBar from "./SearchBar";
 import "../styles/header.css";
 import { NavLink } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
+  const { user } = useAuth();
+
   return (
     <header>
       <div className="header-left">
@@ -20,9 +23,11 @@ export default function Header() {
           <NavLink to="/" className="header-link">
             Discover
           </NavLink>
-          <NavLink to="/" className="header-link">
-            Subscribed
-          </NavLink>
+          {user && (
+            <NavLink to="/?feed=subscribed" className="header-link">
+              Subscribed
+            </NavLink>
+          )}
         </nav>
       </div>
       <div className="header-right">
@@ -32,11 +37,7 @@ export default function Header() {
         </div>
         <div>
           <Link to="/posts/new">
-            <img
-              src={addIcon}
-              alt="add-post"
-              className="header-right-icon"
-            ></img>
+            <img src={addIcon} alt="add-post" className="header-right-icon" />
           </Link>
         </div>
         <div>
