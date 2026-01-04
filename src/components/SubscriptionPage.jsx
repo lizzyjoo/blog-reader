@@ -1,9 +1,6 @@
 // display user's subscription list
+import { Link } from "react-router-dom";
 export default function SubscriptionPage({ following }) {
-  if (!following || following.length === 0) {
-    return <p>Not following anyone yet.</p>;
-  }
-
   return (
     <>
       <div className="following-list">
@@ -12,12 +9,6 @@ export default function SubscriptionPage({ following }) {
             <Link to={`/users/${followedUser.username}/profile`}>
               @{followedUser.username}
             </Link>
-            {followedUser.first_name && (
-              <span>
-                {" "}
-                - {followedUser.first_name} {followedUser.last_name}
-              </span>
-            )}
           </div>
         ))}
       </div>

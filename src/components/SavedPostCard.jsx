@@ -2,9 +2,6 @@ import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { useAuth } from "../context/AuthContext";
 import LikeSaveButtons from "./LikeSaveButtons";
-import heart from "../assets/heart.png";
-import comment from "../assets/commentIcon.png";
-import viewIcon from "../assets/viewIcon.png";
 import "../styles/postcard.css";
 
 // more focus on the post title and minimal card layout

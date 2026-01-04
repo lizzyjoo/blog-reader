@@ -37,6 +37,7 @@ export function AuthProvider({ children }) {
       id: decoded.id,
       username: decoded.username,
       isAdmin: decoded.isAdmin,
+      authMethod: decoded.authMethod,
     });
     setIsAuthenticated(true);
   };
