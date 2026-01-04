@@ -17,8 +17,14 @@ export async function getPosts(
   });
   return response.json();
 }
+export async function getSubscribedPosts() {
+  const token = localStorage.getItem("token");
+  const response = await fetch(`${base_URL}/posts/subscribed`, {
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
+  });
+  return response.json();
+}
 
-export async function getSavedPosts() {}
 export async function getpublishedPosts() {
   const response = await fetch(`${base_URL}/posts?published=true`);
   const data = response.json();
