@@ -3,6 +3,7 @@
 // allow user to sort posts (most recent, most liked, most commented, saved)
 // access logic similar to userprofile, ppl and user themselves can both view,
 // tho logged in users have more rights on things
+// if not logged in?
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCurrentUser, getPosts } from "../api/api";
@@ -10,6 +11,7 @@ import { useAuth } from "../context/AuthContext";
 import ProfilePostCard from "./ProfilePostCard";
 import SubscriptionPage from "./SubscriptionPage";
 import FollowButton from "./FollowButton";
+import NotFound from "../pages/NotFound";
 import "../styles/profile.css";
 export default function AuthorPostList() {
   const { username } = useParams();
@@ -21,6 +23,8 @@ export default function AuthorPostList() {
   const [activeMenu, setActiveMenu] = useState("posts");
   const [activeTab, setActiveTab] = useState("all");
   const [sortBy, setSortBy] = useState("recent");
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
 
   const postTabs = [
     { value: "all", label: "All" },
@@ -43,11 +47,16 @@ export default function AuthorPostList() {
         setUser(userData);
       } else {
         const response = await fetch(
-          `http://localhost:3000/users/${
-            username || currentUser?.username
-          }/profile`
+          `http://localhost:3000/users/${username || currentUser?.username}`
         );
+        if (response.status === 404) {
+          setNotFound(true);
+          setLoading(false);
+          return;
+        }
+
         const userData = await response.json();
+        setLoading(false);
         setUser(userData);
       }
     }
@@ -122,10 +131,9 @@ export default function AuthorPostList() {
         return null;
     }
   };
-
-  if (!user) {
-    return <div>Loading...</div>;
-  }
+  if (loading) return <div>Loading...</div>;
+  if (notFound) return <NotFound />;
+  if (!user) return <NotFound />;
 
   const registeredDate = user.registeredDate;
   console.log(registeredDate);
@@ -151,6 +159,7 @@ export default function AuthorPostList() {
   return (
     <>
       <div>
+        <div>THIS IS A HOMEPAGE</div>
         <h1 className="profile-username">@{user.username}</h1>
         {!isOwnProfile && <FollowButton username={user.username} />}
         <div>
