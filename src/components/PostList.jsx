@@ -1,41 +1,50 @@
 import { useState, useEffect } from "react";
-import { getPosts } from "../api/api";
+import { useSearchParams } from "react-router-dom";
+import { getPosts, getSubscribedPosts } from "../api/api";
+import { useAuth } from "../context/AuthContext";
 import PostCard from "./PostCard";
 
 export default function PostList() {
-  // list of posts and setter
+  const { user } = useAuth();
+  const [searchParams] = useSearchParams();
+  const feedType = searchParams.get("feed") || "all";
+
   const [posts, setPosts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
-  // example of side effects: fetching data, timers, setting up event listeners, calling APIs,
   useEffect(() => {
     async function fetchPosts() {
+      setLoading(true);
       try {
-        const data = await getPosts();
-        setPosts(data);
+        const data =
+          feedType === "subscribed"
+            ? await getSubscribedPosts()
+            : await getPosts();
+        setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
-        setError(err, "Failed to fetch posts.");
+        setError("Failed to fetch posts.");
       } finally {
         setLoading(false);
       }
     }
     fetchPosts();
-  }, []); // empty dependency array means it runs once on mount
-  if (loading) {
-    return <div>Loading...</div>;
-  }
-  if (error) {
-    return <div>{error}</div>;
-  }
+  }, [feedType]);
+
+  if (loading) return <div>Loading...</div>;
+  if (error) return <div>{error}</div>;
 
   return (
     <div>
-      <div>
-        {posts.map((post) => (
-          <PostCard key={post.id} post={post} />
-        ))}
-      </div>
+      {posts.length === 0 ? (
+        <p>
+          {feedType === "subscribed"
+            ? "No posts from people you follow."
+            : "No posts found."}
+        </p>
+      ) : (
+        posts.map((post) => <PostCard key={post.id} post={post} />)
+      )}
     </div>
   );
 }
