@@ -38,17 +38,20 @@ export default function ProfileDropdown() {
       {isOpen && (
         <nav className="popup-window open">
           <ul>
-            <li>
-              <button onClick={() => navigate(`/users/${user?.username}`)}>
-                <span>My Page</span>
-              </button>
-            </li>
-
-            <li>
-              <button onClick={() => navigate(`/saved`)}>
-                <span>Saved</span>
-              </button>
-            </li>
+            {isAuthenticated && (
+              <li>
+                <button onClick={() => navigate(`/users/${user?.username}`)}>
+                  <span>My Page</span>
+                </button>
+              </li>
+            )}
+            {isAuthenticated && (
+              <li>
+                <button onClick={() => navigate(`/saved`)}>
+                  <span>Saved</span>
+                </button>
+              </li>
+            )}
 
             {isAuthenticated && (
               <li>
@@ -57,12 +60,14 @@ export default function ProfileDropdown() {
                 </button>
               </li>
             )}
+            {isAuthenticated && (
+              <li>
+                <button onClick={() => navigate("/settings")}>
+                  <span>Settings</span>
+                </button>
+              </li>
+            )}
 
-            <li>
-              <button onClick={() => navigate("/settings")}>
-                <span>Settings</span>
-              </button>
-            </li>
             {user?.isAdmin && (
               <>
                 <div className="dropdown-divider"></div>
@@ -76,10 +81,11 @@ export default function ProfileDropdown() {
                 </a>
               </>
             )}
-
-            <li className="divider">
-              <hr />
-            </li>
+            {isAuthenticated && (
+              <li className="divider">
+                <hr />
+              </li>
+            )}
 
             {isAuthenticated ? (
               <li>
@@ -93,11 +99,18 @@ export default function ProfileDropdown() {
                 </button>
               </li>
             ) : (
-              <li>
-                <button onClick={() => navigate("/login")}>
-                  <span>Login</span>
-                </button>
-              </li>
+              <>
+                <li>
+                  <button onClick={() => navigate("/login")}>
+                    <span>Login</span>
+                  </button>
+                </li>
+                <li>
+                  <button onClick={() => navigate("/register")}>
+                    <span>Register</span>
+                  </button>
+                </li>
+              </>
             )}
           </ul>
         </nav>
