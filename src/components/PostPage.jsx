@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate, useLocation } from "react-router-dom"; // Add useLocation
+import { useParams, useNavigate, useLocation, Link } from "react-router-dom"; // Add useLocation
 import { useAuth } from "../context/AuthContext";
 import { trashPost, getPostById, viewPost } from "../api/api";
 import DOMPurify from "dompurify";
@@ -34,8 +34,6 @@ export default function PostPage() {
     fetchPost();
   }, [id]);
 
-  const isAuthor = user?.id === post?.authorId;
-
   async function handleDelete() {
     if (confirm("Move this post to trash?")) {
       await trashPost(id, token);
@@ -69,11 +67,19 @@ export default function PostPage() {
     return <div>Loading...</div>;
   }
 
+  const isAuthor = user?.id === post?.authorId;
+  const authorLink =
+    user?.id === post.author.id
+      ? "/me"
+      : `/users/${post.author.username}/profile`;
+
   return (
     <div className="post-div">
       <div className="post-content" key={id}>
         <h3>{post.title}</h3>
-        <p>by {post.author.username}</p>
+        <p>
+          by <Link to={authorLink}>{post.author.username}</Link>
+        </p>
         <div
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />

@@ -25,6 +25,9 @@ export async function getpublishedPosts() {
   return data;
 }
 
+export async function getSubscribeList() {
+  const response = await fetch(`${base_URL}/posts?published=true`);
+}
 export async function getMyDrafts(token) {
   const response = await fetch(`${base_URL}/posts?published=false`, {
     headers: { Authorization: `Bearer ${token}` },
@@ -155,8 +158,10 @@ export async function restorePost(postId, token) {
 }
 
 export async function viewPost(postId) {
+  const token = localStorage.getItem("token");
   const response = await fetch(`${base_URL}/posts/${postId}/view`, {
     method: "POST",
+    headers: token ? { Authorization: `Bearer ${token}` } : {},
   });
   return response.json();
 }

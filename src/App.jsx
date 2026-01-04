@@ -74,10 +74,10 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/users/:username/home" element={<AuthorPostList />} />
+            <Route path="/users/:username" element={<AuthorPostList />} />
             {/* User Profile Page, anyone can view; authcontext for author specific op*/}
             <Route
-              path="/users/:username"
+              path="/users/:username/profile"
               element={<UserProfile></UserProfile>}
             />
             <Route

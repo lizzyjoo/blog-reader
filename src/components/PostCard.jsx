@@ -36,7 +36,9 @@ export default function PostCard({ post }) {
 
   // If viewing own post, link to /me, otherwise /users/:username
   const authorLink =
-    user?.id === post.author.id ? "/me" : `/users/${post.author.username}`;
+    user?.id === post.author.id
+      ? "/me"
+      : `/users/${post.author.username}/profile`;
 
   return (
     <div className="postMinDiv">

@@ -35,9 +35,11 @@ export default function SavedPostCard({ post }) {
   const postSavedDay = postSavedAt.split("-")[2].split("T")[0];
   const postSavedMonth = months[Number(postSavedAt.split("-")[1]) - 1];
   const postSavedYear = postSavedAt.split("-")[0];
-  // If viewing own post, link to /me, otherwise /users/:username
+  // If viewing own post, link to /me
   const authorLink =
-    user?.id === post.author.id ? "/me" : `/users/${post.author.username}`;
+    user?.id === post.author.id
+      ? "/me"
+      : `/users/${post.author.username}/profile`;
 
   return (
     <>

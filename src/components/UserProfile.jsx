@@ -15,15 +15,7 @@ export default function UserProfile() {
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
   const [activeMenu, setActiveMenu] = useState("posts");
-  const [activeTab, setActiveTab] = useState("all");
   const [sortBy, setSortBy] = useState("recent");
-
-  const postTabs = [
-    { value: "all", label: "All" },
-    { value: "published", label: "Published" },
-    { value: "drafts", label: "Drafts" },
-    { value: "trash", label: "Trash" },
-  ];
 
   const sortOptions = [
     { value: "recent", label: "Recent" },
@@ -36,10 +28,13 @@ export default function UserProfile() {
     async function fetchUser() {
       if (isOwnProfile && !username) {
         const userData = await getCurrentUser();
+        console.log("User data:", userData);
         setUser(userData);
       } else {
         const response = await fetch(
-          `http://localhost:3000/users/${username || currentUser?.username}`
+          `http://localhost:3000/users/${
+            username || currentUser?.username
+          }/profile`
         );
         const userData = await response.json();
         setUser(userData);
@@ -51,36 +46,17 @@ export default function UserProfile() {
   useEffect(() => {
     async function fetchPosts() {
       if (!user) return;
-
-      const data = await getPosts(
-        sortBy,
-        user.id,
-        isOwnProfile ? activeTab : "published"
-      );
+      const data = await getPosts(sortBy, user.id, "published");
       setPosts(data);
     }
     fetchPosts();
-  }, [user, activeTab, sortBy, isOwnProfile]);
+  }, [user, sortBy]);
 
   const renderComponent = () => {
     switch (activeMenu) {
       case "posts":
         return (
           <div>
-            {isOwnProfile && (
-              <div className="post-tabs">
-                {postTabs.map((tab) => (
-                  <button
-                    key={tab.value}
-                    className={activeTab === tab.value ? "active" : ""}
-                    onClick={() => setActiveTab(tab.value)}
-                  >
-                    {tab.label}
-                  </button>
-                ))}
-              </div>
-            )}
-
             <div className="sort-tabs">
               {sortOptions.map((option) => (
                 <button
@@ -98,20 +74,14 @@ export default function UserProfile() {
                 <p>No posts found.</p>
               ) : (
                 posts.map((post) => (
-                  <ProfilePostCard
-                    key={post.id}
-                    post={post}
-                    isOwnProfile={isOwnProfile}
-                    isTrashView={activeTab === "trash"}
-                    onPostUpdate={() => setActiveTab(activeTab)} // trigger refetch
-                  />
+                  <ProfilePostCard key={post.id} post={post} />
                 ))
               )}
             </div>
           </div>
         );
       case "subscribed":
-        return <SubscriptionPage />;
+        return <SubscriptionPage following={user.following} />;
       default:
         return null;
     }
@@ -121,13 +91,34 @@ export default function UserProfile() {
     return <div>Loading...</div>;
   }
 
+  const registeredDate = user.registeredDate;
+  const months = [
+    "JAN",
+    "FEB",
+    "MAR",
+    "APR",
+    "MAY",
+    "JUN",
+    "JUL",
+    "AUG",
+    "SEP",
+    "OCT",
+    "NOV",
+    "DEC",
+  ];
+  const registerDay = registeredDate.split("-")[2].split("T")[0];
+  const registeMonth = months[Number(registeredDate.split("-")[1]) - 1];
+  const registerYear = registeredDate.split("-")[0];
+
   return (
     <>
       <div>
         <h1 className="profile-username">@{user.username}</h1>
         {!isOwnProfile && <FollowButton username={user.username} />}
         <div>
-          <div>Joined {user.registeredDate}</div>
+          <div>
+            Joined {registeMonth} {registerDay}, {registerYear}
+          </div>
           <div>Posts {user.posts?.length || 0}</div>
           <div>Subscribers {user._count?.subscribers || 0}</div>
           <button

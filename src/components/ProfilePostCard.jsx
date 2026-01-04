@@ -65,13 +65,6 @@ export default function ProfilePostCard({
             <h3>{post.title}</h3>
           </Link>
 
-          {isOwnProfile && (
-            <div className="post-status">
-              {post.published ? "Published" : "Draft"}
-              {post.trashedAt && " • Trashed"}
-            </div>
-          )}
-
           <Link to={`/posts/${post.id}`}>
             <div
               className="post-text"
