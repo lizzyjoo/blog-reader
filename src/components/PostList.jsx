@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getPosts, getSubscribedPosts } from "../api/api";
-import { useAuth } from "../context/AuthContext";
 import PostCard from "./PostCard";
 
 export default function PostList() {
-  const { user } = useAuth();
   const [searchParams] = useSearchParams();
   const feedType = searchParams.get("feed") || "all";
 
@@ -23,6 +21,7 @@ export default function PostList() {
             : await getPosts();
         setPosts(Array.isArray(data) ? data : []);
       } catch (err) {
+        console.log(err);
         setError("Failed to fetch posts.");
       } finally {
         setLoading(false);
