@@ -3,6 +3,8 @@ import { useState } from "react";
 import DOMPurify from "dompurify";
 import { useAuth } from "../context/AuthContext";
 import ChangePassword from "./ChangePassword";
+import DeleteAccount from "./DeleteAccount";
+import ManageSubscriptions from "./ManageSubscriptions";
 
 export default function Settings() {
   const { user } = useAuth();
@@ -27,9 +29,13 @@ export default function Settings() {
         }
 
       case "delete":
-        return <div></div>;
+        return (
+          <div>
+            <DeleteAccount />
+          </div>
+        );
       case "subscription":
-        return <div></div>;
+        return <ManageSubscriptions />;
       default:
         return null;
     }
