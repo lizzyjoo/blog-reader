@@ -5,11 +5,20 @@ import searchIcon from "../assets/search.png";
 import addIcon from "../assets/add.png";
 import SearchBar from "./SearchBar";
 import "../styles/header.css";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 
 export default function Header() {
+  const navigate = useNavigate();
   const { user } = useAuth();
+  function handleSubscribedClick(e) {
+    e.preventDefault();
+    if (!user) {
+      navigate("/login");
+    } else {
+      navigate("/?feed=subscribed");
+    }
+  }
 
   return (
     <header>
@@ -23,11 +32,14 @@ export default function Header() {
           <NavLink to="/" className="header-link">
             Discover
           </NavLink>
-          {user && (
-            <NavLink to="/?feed=subscribed" className="header-link">
-              Subscribed
-            </NavLink>
-          )}
+
+          <NavLink
+            to="/"
+            className="header-link"
+            onClick={handleSubscribedClick}
+          >
+            Subscribed
+          </NavLink>
         </nav>
       </div>
       <div className="header-right">
