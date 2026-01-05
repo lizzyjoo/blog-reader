@@ -47,37 +47,52 @@ export default function Login() {
 
   return (
     <div className="login-container">
-      <h1>Login</h1>
+      <div className="wrapper-top">
+        <p className="text-1">Hello Again!</p>
+        <p className="text-2">Welcome Back, You’ve Been Missed!</p>
+      </div>
+      <div className="wrapper-middle">
+        <form className="login-form" onSubmit={handleLogin}>
+          <div className="form-group">
+            <label htmlFor="login_input">Username or Email</label>
+            <input
+              className="login-input"
+              type="text"
+              id="login_input"
+              name="login_input"
+              required
+              autoComplete="username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              className="login-input"
+              type="password"
+              id="password"
+              name="password"
+              required
+              autoComplete="current-password"
+            />
+          </div>
+          <button type="submit" className="login-submit">
+            Login
+          </button>
+        </form>
+      </div>
+      <p className="oauth-text">( Or Continue With )</p>
+      <div className="wrapper-bottom">
+        <OAuthButtons />
+      </div>
+
+      <div register-action>
+        Don't have an account?{" "}
+        <Link to="/register" className="register-link">
+          Register
+        </Link>
+      </div>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
-
-      <form onSubmit={handleLogin}>
-        <div className="form-group">
-          <label htmlFor="login_input">Username or Email</label>
-          <input
-            type="text"
-            id="login_input"
-            name="login_input"
-            required
-            autoComplete="username"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            required
-            autoComplete="current-password"
-          />
-        </div>
-        <button type="submit">Login</button>
-        <OAuthButtons />
-        <div>
-          Don't have an account? <Link to="/register">Register</Link>
-        </div>
-      </form>
     </div>
   );
 }
