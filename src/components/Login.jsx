@@ -51,6 +51,14 @@ export default function Login() {
         <p className="text-1">Hello Again!</p>
         <p className="text-2">Welcome Back, You’ve Been Missed!</p>
       </div>
+      <div className="error-div">
+        {error && (
+          <p className="error-msg" style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
+      </div>
+
       <div className="wrapper-middle">
         <form className="login-form" onSubmit={handleLogin}>
           <div className="form-group">
@@ -85,14 +93,12 @@ export default function Login() {
         <OAuthButtons />
       </div>
 
-      <div register-action>
+      <div className="register-div">
         Don't have an account?{" "}
         <Link to="/register" className="register-link">
           Register
         </Link>
       </div>
-
-      {error && <p style={{ color: "red" }}>{error}</p>}
     </div>
   );
 }
