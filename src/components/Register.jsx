@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import OAuthButtons from "./OAuthButtons";
-import "../styles/register.css";
+import "../styles/login.css";
 
 //need to check if users are already looged in, if so redirect to home page
 // handle for if user email already exists
@@ -28,6 +28,11 @@ export default function Register() {
     const username = event.target.username.value;
     const email = event.target.email.value;
     const password = event.target.password.value;
+    const confirm_password = event.target.confirm_password.value;
+    if (password !== confirm_password) {
+      setError("Passwords do not match");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:3000/auth/register", {
@@ -53,44 +58,100 @@ export default function Register() {
   }
 
   return (
-    <div className="register">
-      <h1>Register</h1>
-      {error && <p style={{ color: "red" }}>{error}</p>}
-      <form onSubmit={handleRegister}>
-        <label htmlFor="first_name">First Name</label>
-        <input type="text" id="first_name" name="first_name" required />
-        <label htmlFor="last_name">Last Name</label>
-        <input type="text" id="last_name" name="last_name" required />
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          required
-          autoComplete="username"
-        />
-        <label htmlFor="email">email</label>
-        <input
-          type="email"
-          id="email"
-          name="email"
-          required
-          autoComplete="email"
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          required
-          autoComplete="new-password"
-        />
-        <button type="submit">Register</button>
+    <div className="register-container">
+      <div className="wrapper-top">
+        <p className="text-1">Let's Create Your Acccount</p>
+        <p className="text-2">Join urtext to begin your writing journey</p>
+      </div>
+      <div className="error-div">
+        {error && (
+          <p className="error-msg" style={{ color: "red" }}>
+            {error}
+          </p>
+        )}
+      </div>
+      <div className="wrapper-middle">
+        <form className="register-form" onSubmit={handleRegister}>
+          <div className="form-group">
+            <label htmlFor="first_name">First Name</label>
+            <input
+              className="login-input"
+              type="text"
+              id="first_name"
+              name="first_name"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="last_name">Last Name</label>
+            <input
+              className="login-input"
+              type="text"
+              id="last_name"
+              name="last_name"
+              required
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              className="login-input"
+              type="text"
+              id="username"
+              name="username"
+              required
+              autoComplete="username"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="email">Email</label>
+            <input
+              className="login-input"
+              type="email"
+              id="email"
+              name="email"
+              required
+              autoComplete="email"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              className="login-input"
+              type="password"
+              id="password"
+              name="password"
+              required
+              autoComplete="new-password"
+            />
+          </div>
+          <div className="form-group">
+            <label htmlFor="confirm_password">Confirm Password</label>
+            <input
+              className="login-input"
+              type="password"
+              id="confirm_password"
+              name="confirm_password"
+              required
+              autoComplete="new-password"
+            />
+          </div>
+
+          <button type="submit" className="login-submit">
+            Register
+          </button>
+        </form>
+      </div>
+      <p className="oauth-text">( Or Continue With )</p>
+      <div className="wrapper-bottom">
         <OAuthButtons />
-        <div>
-          Already have an account? <Link to="/login">Login</Link>
-        </div>
-      </form>
+      </div>
+      <div className="register-div">
+        Already have an account?{" "}
+        <Link to="/login" className="register-link">
+          Login
+        </Link>
+      </div>
     </div>
   );
 }
