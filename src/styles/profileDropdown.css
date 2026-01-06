@@ -84,6 +84,7 @@ a {
   display: inline-block;
   text-rendering: optimizeLegibility;
   position: relative;
+  cursor: pointer;
 }
 
 .popup-window {

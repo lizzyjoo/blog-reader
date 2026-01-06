@@ -4,6 +4,10 @@
   position: relative;
 }
 
+a {
+  text-decoration: none;
+}
+
 .postMinDiv::before {
   content: "";
   height: 100%;

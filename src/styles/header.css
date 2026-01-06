@@ -1,20 +1,39 @@
 @import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Domine:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 header {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
+  /* justify-content: space-between; */
   align-items: center;
   padding: 1rem 0;
   padding-bottom: 3rem;
   background-color: #161b33;
   color: #ffffff;
-  width: 100%;
+
   z-index: 99999;
+}
+
+.header-top {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 .header-logo {
   font-family: Bodoni Moda SC, serif;
   font-size: 2.5rem;
   font-weight: 800;
   color: #ffffff;
+}
+.header-home .header-logo {
+  font-size: 2.5rem;
+}
+.header-user .header-logo {
+  font-size: 1.5rem;
+}
+.header-post .header-logo {
+  font-size: 1.5rem;
+}
+.header-default .header-logo {
+  font-size: 1.75rem;
 }
 
 .header-left {
@@ -28,6 +47,7 @@ header {
   gap: 0.5rem;
   padding-right: 3rem;
   padding-bottom: 4rem;
+  align-items: center;
 }
 
 .header-center {
@@ -52,4 +72,66 @@ header {
 .header-nav a:hover {
   text-decoration: underline;
   transition: all 1.3s ease-in-out;
+}
+
+/* search bar */
+.search-container {
+  display: flex;
+  gap: 8px;
+}
+
+.header-right-button {
+  padding: 0;
+  box-sizing: border-box;
+  background-color: #161b33;
+  width: 2.5rem;
+}
+.search-icon {
+  width: 2.5rem;
+}
+
+.search-input {
+  border-radius: 26px;
+  font-size: 16px;
+  color: #000000;
+  min-width: 26rem;
+  padding: 10px 16px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+/* user homepage options */
+
+.user-action {
+  display: flex;
+  align-items: center;
+}
+.user-info {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+}
+.user-info p {
+  color: #ffffff;
+  font-family: "josefin slab", serif;
+  font-size: 3em;
+  margin: 0;
+}
+
+.info-link {
+  background-color: #161b33;
+  padding: 0;
+}
+
+.info-btn {
+  background-color: #161b33;
+  padding: 0.6em 0.2em;
+}
+.info-icon {
+  /* width: 2.5rem;
+  height: auto; */
+  width: 1rem;
+  height: 1rem;
 }
