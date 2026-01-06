@@ -51,10 +51,12 @@ export default function UserProfile() {
       case "posts":
         return (
           <div className="recent-post">
-            <div className="profile-recent-text">Most Recent Post:</div>
+            <div className="profile-recent-text">
+              {user.posts.length !== 0 && `Most Recent Post:`}
+            </div>
             <div className="post-preview">
               {user.posts.length === 0 ? (
-                <p>No posts found.</p>
+                <p>No posts yet—add one!</p>
               ) : (
                 user.posts.map((post) => (
                   <ProfilePostCard key={post.id} post={post} />
