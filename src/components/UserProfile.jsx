@@ -5,6 +5,7 @@ import { useAuth } from "../context/AuthContext";
 import NotFound from "../pages/NotFound";
 import ProfilePostCard from "./ProfilePostCard";
 import SubscriptionPage from "./SubscriptionPage";
+import FollowingPage from "./FollowingPage";
 import FollowButton from "./FollowButton";
 import "../styles/profile.css";
 
@@ -39,12 +40,19 @@ export default function UserProfile() {
     fetchUser();
   }, [username, isOwnProfile, currentUser]);
 
+  useEffect(() => {
+    // Reset state when username changes
+    setActiveMenu("posts");
+    setUser(null);
+  }, [username]);
+
   const renderComponent = () => {
     switch (activeMenu) {
       case "posts":
         return (
-          <div>
-            <div className="posts-list">
+          <div className="recent-post">
+            <div className="profile-recent-text">Most Recent Post:</div>
+            <div className="post-preview">
               {user.posts.length === 0 ? (
                 <p>No posts found.</p>
               ) : (
@@ -53,7 +61,7 @@ export default function UserProfile() {
                 ))
               )}
             </div>
-            {user._count.posts > 3 && (
+            {user._count.posts > 1 && (
               <Link to={`/users/${user.username}`} className="view-all-link">
                 View all {user._count.posts} posts →
               </Link>
@@ -62,6 +70,8 @@ export default function UserProfile() {
         );
       case "subscribed":
         return <SubscriptionPage following={user.following} />;
+      case "following":
+        return <FollowingPage subscribers={user.subscribers} />;
       default:
         return null;
     }
@@ -93,27 +103,37 @@ export default function UserProfile() {
 
   return (
     <>
-      <div>
-        <h1 className="profile-username">@{user.username}</h1>
-        {!isOwnProfile && <FollowButton username={user.username} />}
-        <div>
-          <div>
+      <div className="profile-container">
+        <div className="user-profile-title">
+          <h1 className="profile-username">@{user.username}</h1>
+        </div>
+
+        <div className="profile-menu">
+          <div className="user-info">
             Joined {registeMonth} {registerDay}, {registerYear}
           </div>
-          <div>Posts {user._count?.posts || 0}</div>
-          <div>Subscribers {user._count?.subscribers || 0}</div>
-          <button
-            className={activeMenu === "posts" ? "active" : ""}
-            onClick={() => setActiveMenu("posts")}
-          >
-            Posts
-          </button>
-          <button
-            className={activeMenu === "subscribed" ? "active" : ""}
-            onClick={() => setActiveMenu("subscribed")}
-          >
-            Following {user._count?.following || 0}
-          </button>
+          <div className="user-info">
+            <button
+              className={activeMenu === "posts" ? "active" : ""}
+              onClick={() => setActiveMenu("posts")}
+            >
+              Posts {user._count?.posts || 0}
+            </button>
+
+            <button
+              className={activeMenu === "following" ? "active" : ""}
+              onClick={() => setActiveMenu("following")}
+            >
+              <div>Subscribers {user._count?.subscribers || 0}</div>
+            </button>
+            <button
+              className={activeMenu === "subscribed" ? "active" : ""}
+              onClick={() => setActiveMenu("subscribed")}
+            >
+              Following {user._count?.following || 0}
+            </button>
+            {!isOwnProfile && <FollowButton username={user.username} />}
+          </div>
         </div>
       </div>
 
