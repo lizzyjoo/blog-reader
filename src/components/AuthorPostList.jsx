@@ -9,8 +9,7 @@ import { useParams } from "react-router-dom";
 import { getCurrentUser, getPosts } from "../api/api";
 import { useAuth } from "../context/AuthContext";
 import ProfilePostCard from "./ProfilePostCard";
-import SubscriptionPage from "./SubscriptionPage";
-import FollowButton from "./FollowButton";
+import SortDropdown from "./SortDropdown";
 import NotFound from "../pages/NotFound";
 import "../styles/profile.css";
 export default function AuthorPostList() {
@@ -20,7 +19,6 @@ export default function AuthorPostList() {
 
   const [user, setUser] = useState(null);
   const [posts, setPosts] = useState([]);
-  const [activeMenu, setActiveMenu] = useState("posts");
   const [activeTab, setActiveTab] = useState("all");
   const [sortBy, setSortBy] = useState("recent");
   const [loading, setLoading] = useState(true);
@@ -77,11 +75,29 @@ export default function AuthorPostList() {
     fetchPosts();
   }, [user, activeTab, sortBy, isOwnProfile]);
 
-  const renderComponent = () => {
-    switch (activeMenu) {
-      case "posts":
-        return (
-          <div>
+  useEffect(() => {
+    // Reset state when navigating to a different user
+    setActiveTab("all");
+    setSortBy("recent");
+    setUser(null);
+    setLoading(true);
+    setNotFound(false);
+  }, [username]);
+
+  if (loading) return <div>Loading...</div>;
+  if (notFound) return <NotFound />;
+  if (!user) return <NotFound />;
+
+  const registeredDate = user.registeredDate;
+  console.log(registeredDate);
+
+  return (
+    <>
+      <main>
+        <div className="postlist-container">
+          <div
+            className={`postlist-menu ${!isOwnProfile ? "not-own-menu" : ""}`}
+          >
             {isOwnProfile && (
               <div className="post-tabs">
                 {postTabs.map((tab) => (
@@ -95,95 +111,30 @@ export default function AuthorPostList() {
                 ))}
               </div>
             )}
-
-            <div className="sort-tabs">
-              {sortOptions.map((option) => (
-                <button
-                  key={option.value}
-                  className={sortBy === option.value ? "active" : ""}
-                  onClick={() => setSortBy(option.value)}
-                >
-                  {option.label}
-                </button>
-              ))}
-            </div>
-
-            <div className="posts-list">
-              {posts.length === 0 ? (
-                <p>No posts found.</p>
-              ) : (
-                posts.map((post) => (
-                  <ProfilePostCard
-                    key={post.id}
-                    post={post}
-                    isOwnProfile={isOwnProfile}
-                    isTrashView={activeTab === "trash"}
-                    onPostUpdate={() => setActiveTab(activeTab)} // trigger refetch
-                  />
-                ))
-              )}
-            </div>
+            <SortDropdown
+              sortBy={sortBy}
+              setSortBy={setSortBy}
+              options={sortOptions}
+            />
           </div>
-        );
-      case "subscribed":
-        return <SubscriptionPage />;
-      default:
-        return null;
-    }
-  };
-  if (loading) return <div>Loading...</div>;
-  if (notFound) return <NotFound />;
-  if (!user) return <NotFound />;
 
-  const registeredDate = user.registeredDate;
-  console.log(registeredDate);
-
-  const months = [
-    "JAN",
-    "FEB",
-    "MAR",
-    "APR",
-    "MAY",
-    "JUN",
-    "JUL",
-    "AUG",
-    "SEP",
-    "OCT",
-    "NOV",
-    "DEC",
-  ];
-  const registerDay = registeredDate.split("-")[2].split("T")[0];
-  const registeMonth = months[Number(registeredDate.split("-")[1]) - 1];
-  const registerYear = registeredDate.split("-")[0];
-
-  return (
-    <>
-      <div>
-        <div>THIS IS A HOMEPAGE</div>
-        <h1 className="profile-username">@{user.username}</h1>
-        {!isOwnProfile && <FollowButton username={user.username} />}
-        <div>
-          <div>
-            Joined {registeMonth} {registerDay}, {registerYear}
+          <div className="posts-list">
+            {posts.length === 0 ? (
+              <p>No posts found.</p>
+            ) : (
+              posts.map((post) => (
+                <ProfilePostCard
+                  key={post.id}
+                  post={post}
+                  isOwnProfile={isOwnProfile}
+                  isTrashView={activeTab === "trash"}
+                  onPostUpdate={() => setActiveTab(activeTab)}
+                />
+              ))
+            )}
           </div>
-          <div>Posts {user.posts?.length || 0}</div>
-          <div>Subscribers {user._count?.subscribers || 0}</div>
-          <button
-            className={activeMenu === "posts" ? "active" : ""}
-            onClick={() => setActiveMenu("posts")}
-          >
-            Posts
-          </button>
-          <button
-            className={activeMenu === "subscribed" ? "active" : ""}
-            onClick={() => setActiveMenu("subscribed")}
-          >
-            Following {user._count?.following || 0}
-          </button>
         </div>
-      </div>
-
-      <main>{renderComponent()}</main>
+      </main>
     </>
   );
 }
