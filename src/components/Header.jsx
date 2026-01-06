@@ -32,6 +32,7 @@ export default function Header() {
     location.pathname === "/search" ||
     location.pathname === "/saved" ||
     location.pathname === "/me" ||
+    location.pathname === "/settings" ||
     location.pathname.endsWith("/profile") ||
     location.pathname.startsWith("/posts/");
 
