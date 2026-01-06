@@ -1,0 +1,17 @@
+.subscribe-icon {
+  width: 1rem;
+  height: 1rem;
+}
+
+.follow,
+.following {
+  padding: 0px;
+  background-color: #161b33;
+  min-width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+
+.following-item {
+  font-size: 16px;
+}

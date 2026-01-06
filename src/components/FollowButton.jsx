@@ -1,5 +1,8 @@
 import { useState, useEffect } from "react";
 import { followUser, unfollowUser, checkFollowing } from "../api/api";
+import subscribeIcon from "../assets/subscribe.png";
+import unsubscribeIcon from "../assets/unsubscribe.png";
+import "../styles/follow.css";
 
 export default function FollowButton({ username }) {
   const [isFollowing, setIsFollowing] = useState(false);
@@ -43,7 +46,15 @@ export default function FollowButton({ username }) {
       onClick={handleClick}
       className={isFollowing ? "following" : "follow"}
     >
-      {isFollowing ? "Following" : "Follow"}
+      {isFollowing ? (
+        <img
+          src={unsubscribeIcon}
+          alt="unsubscribe"
+          className="subscribe-icon"
+        />
+      ) : (
+        <img src={subscribeIcon} alt="subscribe" className="subscribe-icon" />
+      )}
     </button>
   );
 }
