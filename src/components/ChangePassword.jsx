@@ -2,6 +2,8 @@
 // = hash the input and see if they (the newly inputted vs. original password) match
 // if so, put (edit) the current password to the new one
 // before fetching backend stuff, confirm the new password & confirm new password input match
+import "../styles/change-password.css";
+
 import { useState } from "react";
 
 export default function ChangePassword() {

@@ -6,6 +6,7 @@ const AuthContext = createContext(null);
 export function AuthProvider({ children }) {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
 
   // initialize from token on app load
   useEffect(() => {
@@ -28,6 +29,7 @@ export function AuthProvider({ children }) {
       } catch {
         localStorage.removeItem("token");
       }
+      setLoading(false);
     }
   }, []);
 
@@ -48,6 +50,9 @@ export function AuthProvider({ children }) {
     setUser(null);
     setIsAuthenticated(false);
   };
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <AuthContext.Provider value={{ isAuthenticated, user, login, logout }}>
