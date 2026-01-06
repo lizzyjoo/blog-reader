@@ -21,7 +21,7 @@ export default function Settings() {
           return <div>Logged in via Google</div>;
         } else {
           return (
-            <div>
+            <div className="setting-section-wrapper">
               <div>Current username: {user.username}</div>
               <ChangePassword />
             </div>
@@ -30,12 +30,17 @@ export default function Settings() {
 
       case "delete":
         return (
-          <div>
+          <div className="setting-section-wrapper">
             <DeleteAccount />
           </div>
         );
       case "subscription":
-        return <ManageSubscriptions />;
+        return (
+          <div className="setting-section-wrapper">
+            <ManageSubscriptions />
+          </div>
+        );
+
       default:
         return null;
     }
