@@ -1,4 +1,3 @@
-import "../styles/oauth.css";
 import "../styles/login.css";
 import googleIcon from "../assets/google.png";
 import githubIcon from "../assets/github.png";

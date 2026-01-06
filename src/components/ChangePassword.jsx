@@ -2,7 +2,7 @@
 // = hash the input and see if they (the newly inputted vs. original password) match
 // if so, put (edit) the current password to the new one
 // before fetching backend stuff, confirm the new password & confirm new password input match
-import "../styles/change-password.css";
+import "../styles/settings.css";
 
 import { useState } from "react";
 
@@ -55,32 +55,47 @@ export default function ChangePassword() {
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
 
-      <form onSubmit={handlePasswordChange}>
-        <label htmlFor="current_password">current password</label>
-        <input
-          type="password"
-          id="current_password"
-          name="current_password"
-          required
-          autoComplete="current_password"
-        ></input>
-        <label htmlFor="new_password">new password</label>
-        <input
-          type="password"
-          id="new_password"
-          name="new_password"
-          required
-          autoComplete="new_password"
-        ></input>
-        <label htmlFor="password_confirm">confirm new password</label>
-        <input
-          type="password"
-          id="password_confirm"
-          name="password_confirm"
-          required
-          autoComplete="new-password"
-        ></input>
-        <button type="submit">Change Password</button>
+      <form onSubmit={handlePasswordChange} className="password-change-form">
+        <div className="form-group">
+          {" "}
+          <label htmlFor="current_password">current password</label>
+          <input
+            type="password"
+            id="current_password"
+            name="current_password"
+            required
+            autoComplete="current_password"
+            className="login-input"
+          ></input>
+        </div>
+        <div className="form-group">
+          {" "}
+          <label htmlFor="new_password">new password</label>
+          <input
+            type="password"
+            id="new_password"
+            name="new_password"
+            required
+            autoComplete="new_password"
+            className="login-input"
+          ></input>
+        </div>
+        <div className="form-group">
+          {" "}
+          <label htmlFor="password_confirm">confirm new password</label>
+          <input
+            type="password"
+            id="password_confirm"
+            name="password_confirm"
+            required
+            autoComplete="new-password"
+            className="login-input"
+          ></input>
+        </div>
+
+        <button type="submit" className="setting-btn">
+          Change Password
+        </button>
       </form>
     </>
   );

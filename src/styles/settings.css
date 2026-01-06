@@ -1,0 +1,80 @@
+.setting-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+/* change password */
+
+.password-change-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 80%;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: 6px;
+  width: 100%;
+}
+
+input:focus {
+  outline: none;
+}
+
+.login-input {
+  border-radius: 16px;
+  font-size: 16px;
+  color: #000000;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px;
+  border: 1px solid #000000;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #fff;
+}
+
+form label {
+  text-align: left;
+  vertical-align: top;
+  font-weight: bolder;
+  font-size: 14px;
+  line-height: 20px;
+  color: #30373d;
+}
+
+.setting-btn {
+  margin-top: 20px;
+  font-size: 14px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 30px;
+  gap: 8px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
+  width: 50%;
+  color: #000000;
+  background-color: #fff;
+}
+
+.setting-btn:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+.setting-btn:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em;
+}
