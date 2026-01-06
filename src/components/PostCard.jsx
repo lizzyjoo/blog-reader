@@ -71,20 +71,28 @@ export default function PostCard({ post }) {
 
           <div className="post-menu">
             <Link to={`/posts/${post.id}`}>
-              <div className="like-count">
-                <img src={heart} alt="like" className="heart-icon" />
+              <div className="post-count" id="like-count">
+                <div className="post-icon">
+                  <img src={heart} alt="like" id="heart-icon" />
+                </div>
+
                 <div className="like-number">{post.likes}</div>
               </div>
             </Link>
             <Link to={`/posts/${post.id}`}>
-              <div className="comment-count">
-                <img src={comment} alt="comment" className="comment-icon" />
+              <div className="post-count">
+                <div className="post-icon">
+                  <img src={comment} alt="comment" className="comment-icon" />
+                </div>
                 <div className="comment-number">{post.comments.length}</div>
               </div>
             </Link>
             <Link to={`/posts/${post.id}`}>
-              <div className="view-count">
-                <img src={viewIcon} alt="view" className="view-icon" />
+              <div className="post-count">
+                <div className="post-icon">
+                  <img src={viewIcon} alt="view" className="view-icon" />
+                </div>
+
                 <div className="view-number">{post.views}</div>
               </div>
             </Link>

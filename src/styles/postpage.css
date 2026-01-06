@@ -1,0 +1,40 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Domine:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+.post-title {
+  margin: 0 0 5px;
+  text-transform: none;
+  text-align: left;
+  line-height: 1.2;
+  color: #333333;
+  font-size: 48px;
+  font-family: "Josefin Sans";
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.post-info p,
+.post-info a {
+  font-family: domine;
+  color: #444444;
+  text-align: left;
+}
+
+.post-info {
+  margin-top: 12px;
+  margin-bottom: 40px;
+}
+
+.post-info span {
+  padding-left: 6px;
+  padding-right: 6px;
+}
+
+#author-name {
+  color: #161b33;
+}
+
+.post-content {
+  font-family: domine;
+  margin-top: 20px;
+  text-align: left;
+  margin-bottom: 80px;
+}

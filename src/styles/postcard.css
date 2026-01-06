@@ -149,7 +149,9 @@ a {
 
 .post-menu {
   display: flex;
+  align-items: center;
   margin-top: 3em;
+  gap: 1px;
 }
 .post-menu img {
   width: 30px;
@@ -157,4 +159,27 @@ a {
 
 .post-menu img :hover {
   cursor: pointer;
+}
+
+/* like image */
+/* the heart img is from a different set, so I had to do a lot of scuffed formatting */
+/* I am sure there are more elegant css styling than this */
+#heart-icon {
+  width: 25px;
+  margin-top: 3px;
+}
+
+.post-icon {
+  height: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: baseline;
+}
+.post-count {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#like-count {
+  margin-right: 2px;
 }

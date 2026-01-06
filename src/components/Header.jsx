@@ -32,7 +32,8 @@ export default function Header() {
     location.pathname === "/search" ||
     location.pathname === "/saved" ||
     location.pathname === "/me" ||
-    location.pathname.endsWith("/profile");
+    location.pathname.endsWith("/profile") ||
+    location.pathname.startsWith("/posts/");
 
   // Check if it's a user page (but not /profile)
   const isUserHomePage =

@@ -1,0 +1,23 @@
+.like-save-buttons {
+  display: flex;
+  gap: 2px;
+}
+
+.like-btn img,
+.save-btn img {
+  width: 25px;
+}
+
+.like-btn,
+.save-btn {
+  background-color: #fff;
+  color: black;
+  border: none;
+  padding: 0;
+  min-width: 40px;
+}
+
+.like-btn:focus,
+.save-btn:focus {
+  outline: none;
+}

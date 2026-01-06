@@ -6,6 +6,7 @@ import DOMPurify from "dompurify";
 import CommentsSection from "./CommentsSection";
 import LikeSaveButtons from "./LikeSaveButtons";
 import NotFound from "../pages/NotFound";
+import "../styles/postpage.css";
 
 export default function PostPage() {
   const { id, commentId } = useParams();
@@ -73,20 +74,52 @@ export default function PostPage() {
       ? "/me"
       : `/users/${post.author.username}/profile`;
 
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const postDay = post.created_at.split("-")[2].split("T")[0];
+  const postMonth = months[Number(post.created_at.split("-")[1]) - 1];
+  const postYear = post.created_at.split("-")[0];
+
   return (
     <div className="post-div">
       <div className="post-content" key={id}>
-        <h3>{post.title}</h3>
-        <p>
-          by <Link to={authorLink}>{post.author.username}</Link>
-        </p>
+        <div className="post-title">{post.title}</div>
+        <div className="post-info">
+          <p>
+            by
+            <Link to={authorLink}>
+              <span id="author-name">{post.author.username}</span>
+            </Link>
+            <span className="slash">/</span>
+            {postMonth} {postDay}, {postYear}
+            <span className="slash">/</span>
+            {post.comments.length > 1
+              ? `${post.comments.length} comments`
+              : `${post.comments.length} comment`}
+            <span className="slash">/</span>
+            {post.views > 1 ? `${post.views} views` : `${post.view} view`}
+          </p>
+        </div>
+
         <div
+          className="post-content"
           dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
         />
 
         <div className="post-actions-row">
           <LikeSaveButtons postId={post.id} initialLikes={post.likes} />
-          <div className="view-count">{post.views} views</div>
         </div>
 
         {isAuthor && (
@@ -98,7 +131,7 @@ export default function PostPage() {
           </div>
         )}
       </div>
-      <div ref={commentSectionRef}>
+      <div className="comments-wrapper" ref={commentSectionRef}>
         <CommentsSection postId={post.id} />
       </div>
     </div>

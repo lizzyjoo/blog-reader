@@ -1,3 +1,4 @@
+import "../styles/like-save.css";
 import { useState, useEffect } from "react";
 import {
   likePost,
@@ -65,7 +66,11 @@ export default function LikeSaveButtons({ postId, initialLikes }) {
   return (
     <div className="like-save-buttons">
       <button onClick={handleLike} className="like-btn">
-        <img src={isLiked ? heartFilled : heartEmpty} alt="like" />
+        <img
+          src={isLiked ? heartFilled : heartEmpty}
+          alt="like"
+          className="heart"
+        />
         <span>{likes}</span>
       </button>
       <button onClick={handleSave} className="save-btn">
