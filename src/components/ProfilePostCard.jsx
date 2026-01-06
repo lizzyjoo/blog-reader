@@ -1,9 +1,10 @@
 import { Link } from "react-router-dom";
 import DOMPurify from "dompurify";
 import { trashPost, restorePost } from "../api/api";
-import heart from "../assets/heart.png";
-import comment from "../assets/commentIcon.png";
-import viewIcon from "../assets/viewIcon.png";
+import "../styles/profile-postcard.css";
+// import heart from "../assets/heart.png";
+// import comment from "../assets/commentIcon.png";
+// import viewIcon from "../assets/viewIcon.png";
 
 export default function ProfilePostCard({
   post,
@@ -13,7 +14,7 @@ export default function ProfilePostCard({
 }) {
   const token = localStorage.getItem("token");
 
-  const postContentLimit = 500;
+  const postContentLimit = 200;
   const contentText =
     post.content.length > postContentLimit
       ? post.content.slice(0, postContentLimit) + " ..."
@@ -50,66 +51,47 @@ export default function ProfilePostCard({
   }
 
   return (
-    <div className="postMinDiv">
-      <div className="post-date">
-        <div className="date-day">{postDay}</div>
-        <div className="date-month-year">
-          <span className="date-month">{postMonth}</span>
-          <span className="date-hyphen">-</span>
-          <span className="date-year">{postYear}</span>
-        </div>
+    <div className="profile-card">
+      <div className="date-time-container">
+        <time className="date-time" dateTime="2022-10-10">
+          <span>{postYear}</span>
+          <span className="separator" />
+          <span>
+            {postMonth} {postDay}
+          </span>
+        </time>
       </div>
-      <article className="content-wrapper">
-        <div className="post-wrapper">
+      <div className="content">
+        <div className="infos">
           <Link to={`/posts/${post.id}`}>
-            <h3>{post.title}</h3>
+            <span className="title">{post.title}</span>
           </Link>
-
           <Link to={`/posts/${post.id}`}>
-            <div
-              className="post-text"
+            <p
+              className="description"
               dangerouslySetInnerHTML={{
                 __html: DOMPurify.sanitize(contentText),
               }}
-            />
+            ></p>
           </Link>
-
-          <div className="post-menu">
-            <Link to={`/posts/${post.id}`}>
-              <div className="like-count">
-                <img src={heart} alt="like" className="heart-icon" />
-                <div className="like-number">{post.likes}</div>
-              </div>
-            </Link>
-            <Link to={`/posts/${post.id}`}>
-              <div className="comment-count">
-                <img src={comment} alt="comment" className="comment-icon" />
-                <div className="comment-number">
-                  {post.comments?.length || 0}
-                </div>
-              </div>
-            </Link>
-            <div className="view-count">
-              <img src={viewIcon} alt="view" className="view-icon" />
-              <div className="view-number">{post.views}</div>
-            </div>
-
-            {isOwnProfile && (
-              <div className="post-actions">
-                {isTrashView ? (
-                  <button onClick={handleRestore} className="restore-btn">
-                    Restore
-                  </button>
-                ) : (
-                  <button onClick={handleTrash} className="trash-btn">
-                    Trash
-                  </button>
-                )}
-              </div>
-            )}
-          </div>
         </div>
-      </article>
+        <Link className="action" Link to={`/posts/${post.id}`}>
+          Read Post
+        </Link>
+      </div>
+      {isOwnProfile && (
+        <div className="post-actions">
+          {isTrashView ? (
+            <button onClick={handleRestore} className="restore-btn">
+              Restore
+            </button>
+          ) : (
+            <button onClick={handleTrash} className="trash-btn">
+              Trash
+            </button>
+          )}
+        </div>
+      )}
     </div>
   );
 }
