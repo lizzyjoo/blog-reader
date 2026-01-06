@@ -22,7 +22,10 @@ export default function Settings() {
         } else {
           return (
             <div className="setting-section-wrapper">
-              <div>Current username: {user.username}</div>
+              <div className="setting-section-name">Change Password</div>
+              <div className="setting-section-caption">
+                Current username: {user.username}
+              </div>
               <ChangePassword />
             </div>
           );
@@ -48,24 +51,33 @@ export default function Settings() {
 
   return (
     <>
-      <button
-        className={activeMenu === "account" ? "active" : ""}
-        onClick={() => setActiveMenu("account")}
-      >
-        Account Settings
-      </button>
-      <button
-        className={activeMenu === "subscription" ? "active" : ""}
-        onClick={() => setActiveMenu("subscription")}
-      >
-        Manage Subscription
-      </button>
-      <button
-        className={activeMenu === "delete" ? "active" : ""}
-        onClick={() => setActiveMenu("delete")}
-      >
-        Delete Account
-      </button>
+      <div className="setting-btn-wrapper">
+        <button
+          className={`${
+            activeMenu === "account" ? "active" : ""
+          } setting-option-btn`}
+          onClick={() => setActiveMenu("account")}
+        >
+          Change Password
+        </button>
+        <button
+          className={`${
+            activeMenu === "subscription" ? "active" : ""
+          } setting-option-btn`}
+          onClick={() => setActiveMenu("subscription")}
+        >
+          Manage Subscription
+        </button>
+        <button
+          className={`${
+            activeMenu === "delete" ? "active" : ""
+          } setting-option-btn`}
+          onClick={() => setActiveMenu("delete")}
+        >
+          Delete Account
+        </button>
+      </div>
+
       <main>{renderComponent()}</main>
     </>
   );

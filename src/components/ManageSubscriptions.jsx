@@ -52,7 +52,7 @@ export default function ManageSubscriptions() {
 
   return (
     <div className="manage-subscriptions">
-      <h2>Following ({following.length})</h2>
+      <div className="setting-section-name">Following ({following.length})</div>
 
       {following.length === 0 ? (
         <p>You're not following anyone yet.</p>
@@ -63,13 +63,11 @@ export default function ManageSubscriptions() {
               <Link to={`/users/${user.username}/profile`}>
                 @{user.username}
               </Link>
-              {user.first_name && (
-                <span>
-                  {" "}
-                  - {user.first_name} {user.last_name}
-                </span>
-              )}
-              <button onClick={() => handleUnfollow(user.username)}>
+
+              <button
+                onClick={() => handleUnfollow(user.username)}
+                className="follow-btn"
+              >
                 Unfollow
               </button>
             </div>

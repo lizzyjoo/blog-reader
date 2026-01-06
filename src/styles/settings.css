@@ -3,6 +3,60 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  text-align: left;
+}
+
+.setting-section-name {
+  font-size: 30px;
+  font-weight: bolder;
+}
+
+.setting-section-caption {
+  margin-bottom: 30px;
+}
+.setting-btn-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 40px;
+}
+
+.setting-option-btn {
+  align-items: center;
+  background-color: transparent;
+  color: black;
+  cursor: pointer;
+  display: flex;
+  font-family: ui-sans-serif, system-ui, -apple-system, system-ui, "Segoe UI",
+    Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.5;
+  text-decoration: none;
+  text-transform: uppercase;
+  outline: 0;
+  border: 0;
+  padding: 1rem;
+}
+
+.setting-option-btn:before {
+  background-color: black;
+  content: "";
+  display: inline-block;
+  height: 1px;
+  margin-right: 10px;
+  transition: all 0.42s cubic-bezier(0.25, 0.8, 0.25, 1);
+  width: 0;
+}
+
+.setting-option-btn:hover:before {
+  background-color: black;
+  width: 3rem;
+}
+
+.setting-option-btn:focus {
+  outline: none;
 }
 /* change password */
 
@@ -69,12 +123,43 @@ form label {
   background-color: #fff;
 }
 
-.setting-btn:hover {
+.setting-btn:hover,
+.follow-btn:hover {
   transform: translate(-0.05em, -0.05em);
   box-shadow: 0.15em 0.15em;
 }
 
-.setting-btn:active {
+.setting-btn:active,
+.follow-btn:active {
   transform: translate(0.05em, 0.05em);
   box-shadow: 0.05em 0.05em;
+}
+
+/* Subscription */
+
+.manage-subscriptions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 80%;
+}
+
+.following-list {
+  display: flex;
+  margin-top: 15px;
+  width: 90%;
+}
+
+.following-item {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.follow-btn {
+  background-color: #fff;
+  color: #000000;
+  border: #000000;
+  border-style: solid;
 }
