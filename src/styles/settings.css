@@ -60,7 +60,7 @@
 }
 /* change password */
 
-.password-change-form {
+.settings-form {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -82,7 +82,7 @@ input:focus {
   outline: none;
 }
 
-.login-input {
+.settings-input {
   border-radius: 16px;
   font-size: 16px;
   color: #000000;
@@ -95,6 +95,10 @@ input:focus {
   width: 100%;
   box-sizing: border-box;
   background-color: #fff;
+}
+
+.delete-form {
+  margin-top: 60px;
 }
 
 form label {
@@ -162,4 +166,14 @@ form label {
   color: #000000;
   border: #000000;
   border-style: solid;
+}
+
+/* delete account */
+.delete-account {
+  display: flex;
+  flex-direction: column;
+}
+
+.delete-account p {
+  margin: 0;
 }

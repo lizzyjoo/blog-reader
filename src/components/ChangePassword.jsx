@@ -55,7 +55,7 @@ export default function ChangePassword() {
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>{success}</p>}
 
-      <form onSubmit={handlePasswordChange} className="password-change-form">
+      <form onSubmit={handlePasswordChange} className="settings-form">
         <div className="form-group">
           {" "}
           <label htmlFor="current_password">current password</label>
@@ -65,7 +65,7 @@ export default function ChangePassword() {
             name="current_password"
             required
             autoComplete="current_password"
-            className="login-input"
+            className="settings-input"
           ></input>
         </div>
         <div className="form-group">
@@ -77,7 +77,7 @@ export default function ChangePassword() {
             name="new_password"
             required
             autoComplete="new_password"
-            className="login-input"
+            className="settings-input"
           ></input>
         </div>
         <div className="form-group">
@@ -89,7 +89,7 @@ export default function ChangePassword() {
             name="password_confirm"
             required
             autoComplete="new-password"
-            className="login-input"
+            className="settings-input"
           ></input>
         </div>
 

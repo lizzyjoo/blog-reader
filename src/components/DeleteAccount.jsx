@@ -44,21 +44,26 @@ export default function DeleteAccount() {
 
   return (
     <div className="delete-account">
-      <h2>Delete Account</h2>
+      <div className="setting-section-name">Delete Account</div>
       <p>This action is permanent and cannot be undone.</p>
       <p>All your posts, comments, and data will be deleted.</p>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
 
-      <form onSubmit={handleDelete}>
-        <label htmlFor="confirm">Type DELETE to confirm:</label>
-        <input
-          type="text"
-          id="confirm"
-          value={confirmText}
-          onChange={(e) => setConfirmText(e.target.value)}
-        />
-        <button type="submit" className="delete-btn">
+      <form onSubmit={handleDelete} className="settings-form">
+        <div className="form-group delete-form">
+          {" "}
+          <label htmlFor="confirm">Type DELETE to confirm:</label>
+          <input
+            type="text"
+            id="confirm"
+            value={confirmText}
+            onChange={(e) => setConfirmText(e.target.value)}
+            className="settings-input"
+          />
+        </div>
+
+        <button type="submit" className="setting-btn">
           Delete My Account
         </button>
       </form>
