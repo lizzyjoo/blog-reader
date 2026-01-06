@@ -1,14 +1,12 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
-export default function SearchBar() {
-  const [query, setQuery] = useState("");
+import "../styles/header.css";
+export default function SearchBar({ searchQuery, setSearchQuery }) {
   const navigate = useNavigate();
 
   function handleSubmit(event) {
     event.preventDefault();
-    if (query.trim()) {
-      navigate(`/search?q=${encodeURIComponent(query)}`);
+    if (searchQuery.trim()) {
+      navigate(`/search?q=${encodeURIComponent(searchQuery)}`);
     }
   }
 
@@ -16,11 +14,12 @@ export default function SearchBar() {
     <form onSubmit={handleSubmit} className="search-bar">
       <input
         type="text"
-        value={query}
-        onChange={(e) => setQuery(e.target.value)}
+        value={searchQuery}
+        onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search posts..."
+        autoFocus
+        className="search-input"
       />
-      <button type="submit">Search</button>
     </form>
   );
 }
