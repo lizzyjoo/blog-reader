@@ -1,14 +1,9 @@
 // display user's post list (user homepage)
-// allow user to add new post, edit post, delete post
-// allow user to sort posts (most recent, most liked, most commented, saved)
-// access logic similar to userprofile, ppl and user themselves can both view,
-// tho logged in users have more rights on things
-// if not logged in?
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCurrentUser, getPosts } from "../api/api";
 import { useAuth } from "../context/AuthContext";
-import ProfilePostCard from "./ProfilePostCard";
+import PostCard from "./PostCard";
 import SortDropdown from "./SortDropdown";
 import NotFound from "../pages/NotFound";
 import "../styles/profile.css";
@@ -123,7 +118,7 @@ export default function AuthorPostList() {
               <p>No posts found.</p>
             ) : (
               posts.map((post) => (
-                <ProfilePostCard
+                <PostCard
                   key={post.id}
                   post={post}
                   isOwnProfile={isOwnProfile}
