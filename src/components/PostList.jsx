@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import { getPosts, getSubscribedPosts } from "../api/api";
+import "../styles/postlist.css";
 import PostCard from "./PostCard";
 
 export default function PostList() {

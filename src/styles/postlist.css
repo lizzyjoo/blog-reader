@@ -1,0 +1,45 @@
+.postlist-container {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.post-tabs {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.postlist-menu {
+  display: flex;
+  justify-content: space-between;
+}
+.post-tabs button {
+  background: #fff;
+  font-family: inherit;
+  padding: 0.6em 1.3em;
+  font-weight: 900;
+  font-size: 18px;
+  border: 1px solid black;
+  border-radius: 0.4em;
+  /* box-shadow: 0.1em 0.1em; */
+  cursor: pointer;
+  color: black;
+}
+
+.post-tabs button:hover {
+  transform: translate(-0.05em, -0.05em);
+  box-shadow: 0.15em 0.15em;
+}
+
+.post-tabs button:active {
+  transform: translate(0.05em, 0.05em);
+  box-shadow: 0.05em 0.05em;
+}
+
+.posts-list {
+  margin-top: 3rem;
+}
+
+.not-own-menu {
+  justify-content: end;
+}
