@@ -1,0 +1,30 @@
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Domine:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+body {
+  font-family: josefin sans, sans-serif;
+}
+footer {
+  padding-bottom: 3rem;
+}
+.footer-wrapper {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+}
+.footer-options {
+}
+
+.creator-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.social-media {
+  display: flex;
+  gap: 6px;
+}
+.footer-icon {
+  width: 30px;
+  height: 30px;
+}

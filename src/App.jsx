@@ -16,6 +16,7 @@ import ForgotPassword from "./components/ForgotPassword";
 import ResetPassword from "./components/ResetPassword";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
+import About from "./components/About";
 import AuthCallback from "./pages/AuthCallback";
 
 function App() {
@@ -93,6 +94,7 @@ function App() {
               }
             />
             <Route path="/search" element={<SearchResults />} />
+            <Route path="/about" element={<About />}></Route>
           </Routes>
         </main>
       </div>
