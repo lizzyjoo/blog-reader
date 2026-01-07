@@ -33,6 +33,7 @@ export default function CreatePost() {
         placeholder="Title"
         name="title"
         id="create-post-title"
+        className="write-post-title"
       />
 
       <Editor

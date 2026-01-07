@@ -38,6 +38,7 @@
   margin-top: 20px;
   text-align: left;
   margin-bottom: 80px;
+  position: relative;
 }
 
 .post-content p {

@@ -4,7 +4,8 @@
   flex-direction: column;
 }
 
-#create-post-title {
+#create-post-title,
+.write-post-title {
   border-radius: 10px;
   font-size: 16px;
   display: flex;
@@ -26,4 +27,25 @@
   font-family: Josefin Sans;
   font-weight: 700;
   text-transform: uppercase;
+}
+
+.form-actions {
+  margin-top: 20px;
+  display: flex;
+  gap: 6px;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-actions button {
+  font-size: 16px;
+  border-radius: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  padding: 14px 30px;
+  gap: 8px;
+  border: 1px solid #000000;
+  box-sizing: border-box;
 }

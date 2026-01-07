@@ -4,6 +4,7 @@ import { useAuth } from "../context/AuthContext";
 import { getPostById } from "../api/api";
 import { updatePost } from "../api/api";
 import { Editor } from "@tinymce/tinymce-react";
+import "../styles/create-post.css";
 
 export default function EditPost() {
   const { id } = useParams();
@@ -60,6 +61,7 @@ export default function EditPost() {
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
+        className="write-post-title"
       />
 
       <Editor

@@ -10,9 +10,25 @@ export default function CommentsSection({ postId }) {
   const { user } = useAuth();
   const token = localStorage.getItem("token");
 
+  const handleCommentDelete = (commentId) => {
+    setComments(comments.filter((c) => c.id !== commentId));
+  };
+
+  const handleCommentUpdate = (updatedComment) => {
+    setComments(
+      comments.map((c) => (c.id === updatedComment.id ? updatedComment : c))
+    );
+  };
+
   useEffect(() => {
     async function fetchComments() {
       const data = await getComments();
+
+      if (!Array.isArray(data)) {
+        setComments([]);
+        return;
+      }
+
       const postComments = data
         .filter((comment) => comment.postId === postId)
         .sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
@@ -79,7 +95,12 @@ export default function CommentsSection({ postId }) {
           <p>No comments yet.</p>
         ) : (
           comments.map((comment) => (
-            <CommentCard comment={comment} key={comment.id} />
+            <CommentCard
+              comment={comment}
+              key={comment.id}
+              onDelete={handleCommentDelete}
+              onUpdate={handleCommentUpdate}
+            />
           ))
         )}
       </div>

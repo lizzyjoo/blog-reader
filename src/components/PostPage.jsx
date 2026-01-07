@@ -1,10 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { useParams, useNavigate, useLocation, Link } from "react-router-dom"; // Add useLocation
+import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { trashPost, getPostById, viewPost } from "../api/api";
 import DOMPurify from "dompurify";
 import CommentsSection from "./CommentsSection";
 import LikeSaveButtons from "./LikeSaveButtons";
+import OptionsDropdown from "./OptionsDropdown";
 import NotFound from "../pages/NotFound";
 import "../styles/postpage.css";
 
@@ -43,7 +44,6 @@ export default function PostPage() {
   }
 
   function handleEdit() {
-    // Remove async - not needed
     navigate(`/posts/${id}/edit`);
   }
 
@@ -95,7 +95,16 @@ export default function PostPage() {
   return (
     <div className="post-div">
       <div className="post-content" key={id}>
-        <div className="post-title">{post.title}</div>
+        <div className="post-header">
+          <div className="post-title">{post.title}</div>
+          {isAuthor && (
+            <OptionsDropdown
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+              className="post"
+            />
+          )}
+        </div>
         <div className="post-info">
           <p>
             by
@@ -105,11 +114,11 @@ export default function PostPage() {
             <span className="slash">/</span>
             {postMonth} {postDay}, {postYear}
             <span className="slash">/</span>
-            {post.comments.length > 1
-              ? `${post.comments.length} comments`
-              : `${post.comments.length} comment`}
+            {post.comments.length === 1
+              ? `${post.comments.length} comment`
+              : `${post.comments.length} comments`}
             <span className="slash">/</span>
-            {post.views > 1 ? `${post.views} views` : `${post.views} view`}
+            {post.views === 1 ? `${post.views} view` : `${post.views} views`}
           </p>
         </div>
 
@@ -121,15 +130,6 @@ export default function PostPage() {
         <div className="post-actions-row">
           <LikeSaveButtons postId={post.id} initialLikes={post.likes} />
         </div>
-
-        {isAuthor && (
-          <div className="author-actions">
-            <button onClick={handleEdit}>Edit</button>
-            <button onClick={handleDelete} className="delete-btn">
-              Delete
-            </button>
-          </div>
-        )}
       </div>
       <div className="comments-wrapper" ref={commentSectionRef}>
         <CommentsSection postId={post.id} />
