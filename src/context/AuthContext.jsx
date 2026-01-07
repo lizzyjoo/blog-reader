@@ -29,8 +29,8 @@ export function AuthProvider({ children }) {
       } catch {
         localStorage.removeItem("token");
       }
-      setLoading(false);
     }
+    setLoading(false);
   }, []);
 
   const login = (token) => {

@@ -86,6 +86,9 @@ export default function Login() {
           <button type="submit" className="login-submit">
             Login
           </button>
+          <Link to={"/forgot-password"} className="forgot-pw">
+            Forgot password?
+          </Link>
         </form>
       </div>
       <p className="oauth-text">( Or Continue With )</p>

@@ -12,6 +12,8 @@ import Settings from "./components/Settings";
 import SavedPosts from "./components/SavedPosts";
 import SearchResults from "./components/SearchResults";
 import EditPost from "./components/EditPost";
+import ForgotPassword from "./components/ForgotPassword";
+import ResetPassword from "./components/ResetPassword";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import AuthCallback from "./pages/AuthCallback";
@@ -53,6 +55,8 @@ function App() {
               }
             />
             <Route path="/login" element={<Login />} />
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+            <Route path="/reset-password" element={<ResetPassword />} />
             {/* 3rd party login callback */}
             <Route path="/auth/callback" element={<AuthCallback />} />
             <Route path="/register" element={<Register />} />

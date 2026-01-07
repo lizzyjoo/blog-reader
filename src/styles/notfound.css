@@ -18,7 +18,7 @@
 
 /* <!-- From Uiverse.io by Jedi-hongbin -->  */
 /* From Uiverse.io by Jedi-hongbin */
-.notfound button {
+.notfound-btn {
   display: flex;
   height: 3em;
   width: 100px;
@@ -34,19 +34,19 @@
   color: #161b33;
 }
 
-.notfound button > svg {
+.notfound-btn > svg {
   margin-right: 5px;
   margin-left: 5px;
   font-size: 20px;
   transition: all 0.4s ease-in;
 }
 
-.notfound button:hover > svg {
+.notfound-btn:hover > svg {
   font-size: 1.2em;
   transform: translateX(-5px);
 }
 
-.notfound button:hover {
+.notfound-btn:hover {
   box-shadow: 9px 9px 33px #d1d1d1, -9px -9px 33px #ffffff;
   transform: translateY(-2px);
 }

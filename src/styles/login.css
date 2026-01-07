@@ -168,3 +168,21 @@ form label {
   margin: 0;
   font-size: 16px;
 }
+.forgot-msg {
+  font-size: 24px;
+  font-weight: bold;
+}
+.forgot-pw {
+  text-decoration: underline;
+  font-size: 12px;
+}
+
+.reset-btn {
+  width: 40%;
+}
+
+.back-login {
+  display: flex;
+  justify-content: center;
+  margin-top: 3rem;
+}
