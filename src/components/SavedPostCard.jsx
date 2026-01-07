@@ -55,7 +55,7 @@ export default function SavedPostCard({ post }) {
         </time>
       </div>
       <div className="content">
-        <div className="infos">
+        <div className="saved-infos">
           <Link to={`/posts/${post.id}`}>
             <span className="title">{post.title}</span>
           </Link>

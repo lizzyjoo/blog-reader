@@ -4,11 +4,22 @@
   align-items: center;
   justify-content: center;
 }
+
+.saved-card-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .saved-title {
-  font-size: 15px;
+  font-size: 25px;
 }
 
 .sort-btn {
+  margin-top: 20px;
   margin-bottom: 20px;
-  width: 2rem;
+  width: 8rem;
+}
+.saved-infos {
+  display: flex;
+  flex-direction: column;
 }

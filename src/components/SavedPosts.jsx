@@ -34,7 +34,7 @@ export default function SavedPosts() {
         <button className="sort-btn" onClick={toggleSort}>
           {sortBy === "recent" ? "Most Recent" : "Oldest"}
         </button>
-        <div>
+        <div className="saved-card-wrapper">
           {savedPosts.length === 0 ? (
             <p>No saved posts yet.</p>
           ) : (

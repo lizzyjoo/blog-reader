@@ -55,11 +55,6 @@
   padding: 1rem;
 }
 
-.saved-infos {
-  display: flex;
-  flex-direction: column;
-}
-
 .title {
   font-weight: 700;
   text-transform: uppercase;
