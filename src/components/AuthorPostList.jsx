@@ -1,4 +1,5 @@
 // display user's post list (user homepage)
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCurrentUser, getPosts } from "../api/api";
@@ -40,7 +41,7 @@ export default function AuthorPostList() {
         setUser(userData);
       } else {
         const response = await fetch(
-          `http://localhost:3000/users/${username || currentUser?.username}`
+          `${API_URL}/users/${username || currentUser?.username}`
         );
         if (response.status === 404) {
           setNotFound(true);

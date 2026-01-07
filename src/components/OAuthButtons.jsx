@@ -3,7 +3,7 @@ import googleIcon from "../assets/google.png";
 import githubIcon from "../assets/github.png";
 
 export default function OAuthButtons() {
-  const API_URL = "http://localhost:3000";
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
   return (
     <div className="oauth-buttons">
