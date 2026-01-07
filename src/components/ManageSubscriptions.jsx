@@ -1,3 +1,4 @@
+import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,7 +11,7 @@ export default function ManageSubscriptions() {
     async function fetchFollowing() {
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch("http://localhost:3000/users/me", {
+        const response = await fetch(`${API_URL}/users/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
           },
@@ -28,15 +29,12 @@ export default function ManageSubscriptions() {
   async function handleUnfollow(username) {
     const token = localStorage.getItem("token");
     try {
-      const response = await fetch(
-        `http://localhost:3000/users/${username}/follow`,
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/users/${username}/follow`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         // Remove from list

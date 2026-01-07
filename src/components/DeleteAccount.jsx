@@ -1,3 +1,4 @@
+import { API_URL } from "../api/api";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
@@ -19,15 +20,12 @@ export default function DeleteAccount() {
     const token = localStorage.getItem("token");
 
     try {
-      const response = await fetch(
-        "http://localhost:3000/settings/account/delete",
-        {
-          method: "DELETE",
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/settings/account/delete`, {
+        method: "DELETE",
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
       if (response.ok) {
         logout();

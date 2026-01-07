@@ -1,3 +1,4 @@
+import { API_URL } from "../api/api";
 import { useState } from "react";
 import { useSearchParams, useNavigate } from "react-router-dom";
 
@@ -21,14 +22,11 @@ export default function ResetPassword() {
     }
 
     try {
-      const response = await fetch(
-        "http://localhost:3000/auth/reset-password",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ token, newPassword }),
-        }
-      );
+      const response = await fetch(`${API_URL}/auth/reset-password`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ token, newPassword }),
+      });
 
       const data = await response.json();
 

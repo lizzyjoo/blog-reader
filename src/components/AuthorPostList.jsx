@@ -1,5 +1,5 @@
 // display user's post list (user homepage)
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { getCurrentUser, getPosts } from "../api/api";

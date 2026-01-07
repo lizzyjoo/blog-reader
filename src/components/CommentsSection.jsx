@@ -1,3 +1,4 @@
+import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import { getComments } from "../api/api";
 import { useAuth } from "../context/AuthContext";
@@ -23,17 +24,14 @@ export default function CommentsSection({ postId }) {
   async function handleSubmit(event) {
     event.preventDefault();
     const comment = event.target.comment.value;
-    const response = await fetch(
-      `http://localhost:3000/posts/${postId}/comments`,
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ content: comment }),
-      }
-    );
+    const response = await fetch(`${API_URL}/posts/${postId}/comments`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({ content: comment }),
+    });
     if (response.ok) {
       const newComment = await response.json();
       setComments([...comments, newComment]);

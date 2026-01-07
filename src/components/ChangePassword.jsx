@@ -2,6 +2,7 @@
 // = hash the input and see if they (the newly inputted vs. original password) match
 // if so, put (edit) the current password to the new one
 // before fetching backend stuff, confirm the new password & confirm new password input match
+import { API_URL } from "../api/api";
 import "../styles/settings.css";
 
 import { useState } from "react";
@@ -23,20 +24,17 @@ export default function ChangePassword() {
       setError("");
       const token = localStorage.getItem("token");
       try {
-        const response = await fetch(
-          "http://localhost:3000/settings/password",
-          {
-            method: "PUT",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${token}`,
-            },
-            body: JSON.stringify({
-              currentPassword,
-              newPassword,
-            }),
-          }
-        );
+        const response = await fetch(`${API_URL}/settings/password`, {
+          method: "PUT",
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${token}`,
+          },
+          body: JSON.stringify({
+            currentPassword,
+            newPassword,
+          }),
+        });
         const data = await response.json();
         if (!response.ok) {
           setError(data.error);

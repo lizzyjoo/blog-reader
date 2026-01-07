@@ -1,3 +1,4 @@
+import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import { getCurrentUser } from "../api/api";
@@ -25,9 +26,7 @@ export default function UserProfile() {
         setUser(userData);
       } else {
         const response = await fetch(
-          `http://localhost:3000/users/${
-            username || currentUser?.username
-          }/profile`
+          `${API_URL}/users/${username || currentUser?.username}/profile`
         );
         const userData = await response.json();
         if (response.status === 404) {

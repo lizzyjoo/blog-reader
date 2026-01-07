@@ -1,3 +1,4 @@
+import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import SavedPostCard from "./SavedPostCard";
 
@@ -12,14 +13,11 @@ export default function SavedPosts() {
   useEffect(() => {
     async function fetchSavedPosts() {
       const token = localStorage.getItem("token");
-      const response = await fetch(
-        `http://localhost:3000/users/saved?sort=${sortBy}`,
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      const response = await fetch(`${API_URL}/users/saved?sort=${sortBy}`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
       const userSavedPosts = await response.json();
       setSavedPosts(userSavedPosts);
     }
