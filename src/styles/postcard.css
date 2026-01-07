@@ -93,7 +93,7 @@ a {
   display: block;
   background: rgba(68, 68, 68, 0.1);
 } */
-.post-wrapper h3 {
+.post-wrapper.post-title {
   font-family: "Josefin Sans";
   text-transform: uppercase;
   font: 35px Josefin Sans;

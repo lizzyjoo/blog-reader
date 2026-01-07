@@ -53,7 +53,7 @@ export default function PostCard({ post }) {
       <article className="content-wrapper">
         <div className="post-wrapper">
           <Link to={`/posts/${post.id}`}>
-            <h3>{post.title}</h3>
+            <div className="post-title">{post.title}</div>
           </Link>
 
           <p className="author">
