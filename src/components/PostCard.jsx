@@ -1,5 +1,4 @@
 import { Link } from "react-router-dom";
-import DOMPurify from "dompurify";
 import { useAuth } from "../context/AuthContext";
 
 import heart from "../assets/heart.png";
@@ -10,11 +9,19 @@ import "../styles/postcard.css";
 export default function PostCard({ post }) {
   const { user } = useAuth();
 
-  const postContentLimit = 500;
+  // strip HTML tags to get plain text
+  const stripHtml = (html) => {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
+  const postContentLimit = 400;
+  const plainText = stripHtml(post.content);
   const contentText =
-    post.content.length > postContentLimit
-      ? post.content.slice(0, postContentLimit) + " ..."
-      : post.content;
+    plainText.length > postContentLimit
+      ? plainText.slice(0, postContentLimit) + "..."
+      : plainText;
 
   const months = [
     "JAN",
@@ -34,7 +41,7 @@ export default function PostCard({ post }) {
   const postMonth = months[Number(post.created_at.split("-")[1]) - 1];
   const postYear = post.created_at.split("-")[0];
 
-  // If viewing own post, link to /me, otherwise /users/:username
+  // if viewing own post, link to /me, otherwise /users/:username
   const authorLink =
     user?.id === post.author.id
       ? "/me"
@@ -61,12 +68,7 @@ export default function PostCard({ post }) {
           </p>
 
           <Link to={`/posts/${post.id}`}>
-            <div
-              className="post-text"
-              dangerouslySetInnerHTML={{
-                __html: DOMPurify.sanitize(contentText),
-              }}
-            />
+            <p className="post-text">{contentText}</p>
           </Link>
 
           <div className="post-menu">
