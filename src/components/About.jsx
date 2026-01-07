@@ -17,7 +17,7 @@ export default function About() {
             >
               <g transform="translate(-201.44063,-235.75466)">
                 <g strokeMiterlimit={10}>
-                  <path d fill="#ffffff" stroke="none" strokeWidth="0.5" />
+                  <path fill="#ffffff" stroke="none" strokeWidth="0.5" />
                   <path
                     d
                     fillOpacity="0.26667"
@@ -51,7 +51,7 @@ export default function About() {
                     stroke="#000000"
                     strokeWidth={7}
                   />
-                  <path d fill="#ffffff" stroke="none" strokeWidth="0.5" />
+                  <path fill="#ffffff" stroke="none" strokeWidth="0.5" />
                   <path
                     d
                     fillOpacity="0.26667"
@@ -272,13 +272,13 @@ export default function About() {
 
           <div className="features-section">
             <h3>What's here now:</h3>
-            <p>
+            <div>
               Full authentication (including GitHub/Google login).
               <p>Follow your favorite authors.</p>
               <p>Save posts for later.</p>
               <p> Rich text editing with TinyMCE.</p>
               <p>Trash/restore posts.</p>
-            </p>
+            </div>
           </div>
 
           <div className="features-section">
