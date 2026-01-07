@@ -31,7 +31,7 @@ export default function SavedPosts() {
     <>
       <div className="saved-wrapper">
         <div className="saved-title">Saved posts</div>
-        <button className="sortBtn" onClick={toggleSort}>
+        <button className="sort-btn" onClick={toggleSort}>
           {sortBy === "recent" ? "Most Recent" : "Oldest"}
         </button>
         <div>

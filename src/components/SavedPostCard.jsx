@@ -1,20 +1,25 @@
 import { Link } from "react-router-dom";
-import DOMPurify from "dompurify";
 import { useAuth } from "../context/AuthContext";
-import LikeSaveButtons from "./LikeSaveButtons";
 import "../styles/profile-postcard.css";
-
-// more focus on the post title and minimal card layout
 
 export default function SavedPostCard({ post }) {
   const { user } = useAuth();
-  const postSavedAt = post.savedAt;
-  const postContentLimit = 200;
-  const contentText =
-    post.content.length > postContentLimit
-      ? post.content.slice(0, postContentLimit) + " ..."
-      : post.content;
 
+  // Strip HTML tags for preview
+  const stripHtml = (html) => {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || "";
+  };
+
+  const postContentLimit = 200;
+  const plainText = stripHtml(post.content);
+  const contentText =
+    plainText.length > postContentLimit
+      ? plainText.slice(0, postContentLimit) + "..."
+      : plainText;
+
+  const postSavedAt = post.savedAt;
   const months = [
     "JAN",
     "FEB",
@@ -32,65 +37,39 @@ export default function SavedPostCard({ post }) {
   const postSavedDay = postSavedAt.split("-")[2].split("T")[0];
   const postSavedMonth = months[Number(postSavedAt.split("-")[1]) - 1];
   const postSavedYear = postSavedAt.split("-")[0];
-  // If viewing own post, link to /me
+
   const authorLink =
     user?.id === post.author.id
       ? "/me"
       : `/users/${post.author.username}/profile`;
 
   return (
-    <>
-      <div className="profile-card">
-        <div className="date-time-container">
-          <time className="date-time" dateTime="2022-10-10">
-            <span>{postSavedYear}</span>
-            <span className="separator" />
-            <span>
-              {postSavedMonth} {postSavedDay}
-            </span>
-          </time>
-        </div>
-        <div className="content">
-          <div className="saved-infos">
-            <Link to={`/posts/${post.id}`}>
-              <span className="title">{post.title}</span>
-            </Link>
-            <Link to={authorLink}>@{post.author.username}</Link>
-            <Link to={`/posts/${post.id}`}>
-              <p
-                className="description"
-                dangerouslySetInnerHTML={{
-                  __html: DOMPurify.sanitize(contentText),
-                }}
-              ></p>
-            </Link>
-          </div>
-        </div>
+    <div className="profile-card">
+      <div className="date-time-container">
+        <time className="date-time">
+          <span>{postSavedYear}</span>
+          <span className="separator" />
+          <span>
+            {postSavedMonth} {postSavedDay}
+          </span>
+        </time>
       </div>
-      {/* <div className="minCardDiv">
-        <div className="minCard-savedAt">
-          <p>saved</p>
-          <p>
-            {postSavedMonth} {postSavedDay}, {postSavedYear}
-          </p>
+      <div className="content">
+        <div className="infos">
+          <Link to={`/posts/${post.id}`}>
+            <span className="title">{post.title}</span>
+          </Link>
+          <Link to={authorLink} className="saved-author">
+            @{post.author.username}
+          </Link>
+          <Link to={`/posts/${post.id}`}>
+            <p className="description">{contentText}</p>
+          </Link>
         </div>
-        <div className="minCard-title">{post.title}</div>
-        <div className="minCar-username">
-          <Link to={authorLink}>{post.author.username}</Link>
-        </div>
-        <Link to={`/posts/${post.id}`}>
-          <div
-            className="post-text"
-            dangerouslySetInnerHTML={{
-              __html: DOMPurify.sanitize(contentText),
-            }}
-          />
+        <Link className="action" to={`/posts/${post.id}`}>
+          Read Post
         </Link>
-        <div className="post-like-save">
-          <LikeSaveButtons postId={post.id} initialLikes={post.likes} />
-          <div className="view-count">{post.views} views</div>
-        </div>
-      </div> */}
-    </>
+      </div>
+    </div>
   );
 }
