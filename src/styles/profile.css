@@ -42,3 +42,7 @@
   font-style: italic;
   /* text-align: left; */
 }
+
+.view-all-link {
+  margin-top: 10px;
+}
