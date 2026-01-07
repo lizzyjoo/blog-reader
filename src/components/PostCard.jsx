@@ -16,7 +16,7 @@ export default function PostCard({ post }) {
     return tmp.textContent || tmp.innerText || "";
   };
 
-  const postContentLimit = 400;
+  const postContentLimit = 450;
   const plainText = stripHtml(post.content);
   const contentText =
     plainText.length > postContentLimit
