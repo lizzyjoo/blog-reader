@@ -55,7 +55,7 @@ export default function SavedPostCard({ post }) {
             <Link to={`/posts/${post.id}`}>
               <span className="title">{post.title}</span>
             </Link>
-            <Link to={authorLink}>{post.author.username}</Link>
+            <Link to={authorLink}>@{post.author.username}</Link>
             <Link to={`/posts/${post.id}`}>
               <p
                 className="description"

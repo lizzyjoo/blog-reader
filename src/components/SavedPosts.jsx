@@ -1,6 +1,7 @@
 import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import SavedPostCard from "./SavedPostCard";
+import "../styles/saved.css";
 
 // only logged in users can access, else redirected to sign in page
 // if other users try to access, they are not authorized
@@ -28,8 +29,8 @@ export default function SavedPosts() {
   }
   return (
     <>
-      <div>
-        <h2>Saved posts</h2>
+      <div className="saved-wrapper">
+        <div className="saved-title">Saved posts</div>
         <button className="sortBtn" onClick={toggleSort}>
           {sortBy === "recent" ? "Most Recent" : "Oldest"}
         </button>

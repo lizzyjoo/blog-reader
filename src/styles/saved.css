@@ -1,0 +1,11 @@
+.saved-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+.saved-title {
+  font-size: 15px;
+}
+
+.sort-btn {
+  margin-bottom: 20px;
+}
