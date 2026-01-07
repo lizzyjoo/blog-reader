@@ -109,7 +109,7 @@ export default function PostPage() {
               ? `${post.comments.length} comments`
               : `${post.comments.length} comment`}
             <span className="slash">/</span>
-            {post.views > 1 ? `${post.views} views` : `${post.view} view`}
+            {post.views > 1 ? `${post.views} views` : `${post.views} view`}
           </p>
         </div>
 
