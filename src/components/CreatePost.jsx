@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { createPost } from "../api/api";
 import { Editor } from "@tinymce/tinymce-react";
+import "../styles/create-post.css";
 
 export default function CreatePost() {
   const [title, setTitle] = useState("");
@@ -25,11 +26,13 @@ export default function CreatePost() {
   }
 
   return (
-    <form onSubmit={(e) => e.preventDefault()}>
+    <form onSubmit={(e) => e.preventDefault()} id="create-post-form">
       <input
         value={title}
         onChange={(e) => setTitle(e.target.value)}
         placeholder="Title"
+        name="title"
+        id="create-post-title"
       />
 
       <Editor
@@ -39,6 +42,7 @@ export default function CreatePost() {
         init={{
           height: 500,
           menubar: false,
+          content_css: "..styles/create-post.css",
           plugins: [
             "advlist",
             "autolink",
@@ -66,8 +70,10 @@ export default function CreatePost() {
           toolbar:
             "restoredraft | undo redo | blocks | bold italic forecolor | alignleft aligncenter " +
             "alignright alignjustify | bullist numlist outdent indent | removeformat | help",
-          content_style:
-            "body { font-family:Helvetica,Arial,sans-serif; font-size:14px }",
+          content_style: `@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Domine:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"); 
+          body { font-family:"Domine", sans-serif; 
+          font-size:14px;
+          line-height: 1.6; }`,
         }}
       />
 
