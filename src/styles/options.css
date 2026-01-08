@@ -99,6 +99,7 @@
 
 .comment-popup-window,
 .post-popup-window {
+  z-index: 1000;
   transform: scale(var(--nav-default-scale));
   visibility: hidden;
   opacity: 0;
