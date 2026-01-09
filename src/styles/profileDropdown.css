@@ -1,5 +1,6 @@
 /* From Uiverse.io by Galahhad */
 /* The design is inspired from the mockapi.io */
+@import url("https://fonts.googleapis.com/css2?family=Bodoni+Moda+SC:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Domine:wght@400..700&family=Josefin+Sans:ital,wght@0,100..700;1,100..700&family=Libre+Bodoni:ital,wght@0,400..700;1,400..700&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
 
 a {
   text-decoration: none;
@@ -136,6 +137,9 @@ a {
   border-radius: var(--nav-button-border-radius);
   cursor: pointer;
   column-gap: var(--nav-button-distance);
+  font-family: "Josefin Sans";
+  font-weight: 400;
+  font-size: 14px;
 }
 
 .popup-window ul li:nth-child(1) svg,
@@ -173,4 +177,8 @@ a {
   transform: scale(var(--nav-active-scale));
   visibility: visible;
   opacity: 1;
+}
+
+.popup-window .admin-link {
+  font-family: "Domine";
 }

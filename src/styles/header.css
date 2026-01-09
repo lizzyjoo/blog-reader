@@ -135,3 +135,63 @@ header {
   width: 1rem;
   height: 1rem;
 }
+
+@media (max-width: 768px) {
+  .header-top {
+    padding: 0.5rem 1rem;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  .header-left {
+    padding-left: 0;
+    padding-bottom: 0;
+  }
+
+  .header-left img,
+  .header-left svg {
+    height: 30px; /* Smaller logo */
+  }
+
+  .header-right {
+    padding-right: 0;
+    padding-bottom: 0;
+    gap: 0.25rem; /* Smaller gap between icons */
+  }
+
+  /* Smaller icons */
+  .header-right img,
+  .header-right svg,
+  .header-right button img {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Make search bar smaller and contained */
+  .search-container {
+    width: 150px;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .search-bar input {
+    width: 100%;
+    font-size: 14px;
+    padding: 0.25rem 0.5rem;
+    box-sizing: border-box;
+  }
+
+  /* Prevent overflow from header */
+  .header,
+  .header-home,
+  .header-top,
+  .header-right,
+  .header-left {
+    max-width: 100%;
+    overflow: hidden;
+    box-sizing: border-box;
+  }
+}

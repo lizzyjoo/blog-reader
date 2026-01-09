@@ -21,7 +21,9 @@ a {
 
 .app-content {
   flex: 1;
-  width: 728px;
+  max-width: 728px;
+  width: 100%;
+  padding: 100px 1rem;
   word-wrap: break-word;
   margin: 0 auto;
   padding: 100px 0;
@@ -29,7 +31,8 @@ a {
 
 .outer-wrapper {
   margin: 10px auto 0;
-  width: 1150px;
+  width: 100%;
+  max-width: 1150px;
   background-color: #fff;
   z-index: 999;
   position: relative;
@@ -49,5 +52,22 @@ a {
   #outer-wrapper {
     max-width: 90%;
     box-shadow: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .app-content {
+    width: 100%;
+    padding: 60px 1rem; /* Less top padding on mobile */
+  }
+
+  .outer-wrapper {
+    width: 100%;
+    margin: 0;
+    box-shadow: none;
+  }
+
+  #fixed-header-bg {
+    height: 200px; /* Shorter header on mobile */
   }
 }

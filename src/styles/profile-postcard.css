@@ -90,3 +90,65 @@
 .action:hover {
   background-color: #161b33;
 }
+
+@media (max-width: 768px) {
+  /* ----- PROFILE CARD FIX ----- */
+  .profile-card {
+    width: 100%;
+    flex-direction: column; /* Stack date and content vertically */
+    max-width: 100%;
+  }
+
+  .date-time-container {
+    writing-mode: horizontal-tb; /* Normal horizontal text */
+    transform: none;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(17, 24, 39, 0.1);
+    border-right: none;
+  }
+
+  .date-time {
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  .separator {
+    display: none;
+  }
+
+  .content {
+    width: 100%;
+  }
+
+  .infos {
+    border-left: none;
+    border-top: 1px solid rgba(17, 24, 39, 0.1);
+    padding: 1rem;
+  }
+
+  .title {
+    font-size: 16px;
+    word-wrap: break-word;
+  }
+
+  .description {
+    font-size: 14px;
+  }
+
+  /* ----- OUTER WRAPPER / CONTAINER ----- */
+  .outer-wrapper,
+  .posts-container,
+  .post-list,
+  main {
+    width: 100%;
+    max-width: 100vw;
+    padding: 0 1rem;
+    box-sizing: border-box;
+  }
+
+  /* Prevent any element from causing horizontal scroll */
+  .post-preview {
+    width: 100%;
+    justify-content: center;
+  }
+}

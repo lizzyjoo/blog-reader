@@ -83,16 +83,7 @@ a {
   position: relative;
   margin-bottom: 40px;
 }
-/* .content-wrapper::before {
-  content: "";
-  height: 100%;
-  position: absolute;
-  width: 1px;
-  left: 59px;
-  top: 25px;
-  display: block;
-  background: rgba(68, 68, 68, 0.1);
-} */
+
 .post-wrapper.post-title {
   font-family: "Josefin Sans";
   text-transform: uppercase;
@@ -182,4 +173,92 @@ a {
 }
 #like-count {
   margin-right: 2px;
+}
+
+@media (max-width: 768px) {
+  /* Stack the card vertically */
+  .postMinDiv {
+    flex-direction: column;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+  .post-date ::after,
+  .post-date::after,
+  .date-month::after,
+  .date-month-year::after,
+  .date-year::after,
+  .date-hyphen::after {
+    display: none !important;
+  }
+
+  .postMinDiv::before {
+    display: none !important;
+  }
+  .date-month-year::after {
+    display: none;
+  }
+
+  /* Remove the vertical line on mobile */
+  .postMinDiv::before {
+    display: none;
+  }
+
+  /* Remove the horizontal line under the date */
+  .post-date {
+    border-bottom: none !important;
+  }
+
+  /* Remove the dot/square indicator */
+  .post-date::after {
+    display: none;
+  }
+
+  /* Date section - horizontal on mobile */
+  .post-date {
+    flex-direction: row;
+    gap: 0.5rem;
+    padding: 0.75rem 1rem;
+    border-bottom: 1px solid rgba(68, 68, 68, 0.1);
+  }
+
+  .date-day {
+    font-size: 24px;
+    line-height: 1;
+  }
+
+  .date-month-year {
+    font-size: 12px;
+    line-height: 1;
+    display: flex;
+    align-items: center;
+  }
+
+  /* Content section - remove fixed padding */
+  .post-wrapper {
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-bottom: 40px;
+    margin-bottom: 40px;
+  }
+
+  /* Title - smaller and wrap properly */
+  .post-wrapper.post-title,
+  .post-wrapper .post-title {
+    font-size: 20px;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+  }
+
+  /* Post text */
+  .post-text {
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  /* Post menu (icons) */
+  .post-menu {
+    margin-top: 1.5em;
+    flex-wrap: wrap;
+  }
 }

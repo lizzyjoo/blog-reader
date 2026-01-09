@@ -67,18 +67,15 @@ export default function ProfileDropdown() {
                 </button>
               </li>
             )}
+            {user?.isAdmin && (
+              <li>
+                <button>Admin</button>
+              </li>
+            )}
 
             {user?.isAdmin && (
               <>
                 <div className="dropdown-divider"></div>
-                <a
-                  href="http://localhost:5174" //
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="admin-link"
-                >
-                  Admin Dashboard
-                </a>
               </>
             )}
             {isAuthenticated && (
