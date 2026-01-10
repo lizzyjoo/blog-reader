@@ -1,3 +1,7 @@
 export default function ScoreComponent() {
-  return "hello";
+  return (
+    <NodeViewWrapper className="react-component">
+      <div>hello</div>
+    </NodeViewWrapper>
+  );
 }
