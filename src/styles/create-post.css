@@ -23,7 +23,7 @@
   text-align: left;
   line-height: 1.2;
   color: #333;
-  font-size: 48px;
+  font-size: 30px;
   font-family: Josefin Sans;
   font-weight: 700;
   text-transform: uppercase;
@@ -48,4 +48,34 @@
   gap: 8px;
   border: 1px solid #000000;
   box-sizing: border-box;
+}
+
+.tiptap-editor .ProseMirror {
+  text-align: left;
+  position: relative;
+  z-index: 1;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 1rem;
+  min-height: 300px;
+}
+
+.tiptap-editor .ProseMirror:focus {
+  outline: none;
+}
+
+.tiptap-editor {
+  position: relative;
+}
+
+.format-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  z-index: 9999;
+  min-width: 150px;
 }
