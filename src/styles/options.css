@@ -207,6 +207,7 @@
   padding-left: 14px;
   padding-right: 14px;
   font-weight: 300;
+  z-index: 9999;
 }
 
 .comment-popup-window.open ul,
