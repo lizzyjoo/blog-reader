@@ -1,7 +1,6 @@
 import { API_URL } from "../api/api";
 import { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import { getCurrentUser } from "../api/api";
 import { useAuth } from "../context/AuthContext";
 import NotFound from "../pages/NotFound";
 import ProfilePostCard from "./ProfilePostCard";
@@ -21,23 +20,21 @@ export default function UserProfile() {
 
   useEffect(() => {
     async function fetchUser() {
-      if (isOwnProfile && !username) {
-        const userData = await getCurrentUser();
-        setUser(userData);
-      } else {
-        const response = await fetch(
-          `${API_URL}/users/${username || currentUser?.username}/profile`
-        );
-        const userData = await response.json();
-        if (response.status === 404) {
-          setNotFound(true);
-          return;
-        }
-        setUser(userData);
+      const targetUsername = username || currentUser?.username;
+      if (!targetUsername) return;
+
+      const response = await fetch(
+        `${API_URL}/users/${targetUsername}/profile`
+      );
+      if (response.status === 404) {
+        setNotFound(true);
+        return;
       }
+      const userData = await response.json();
+      setUser(userData);
     }
     fetchUser();
-  }, [username, isOwnProfile, currentUser]);
+  }, [username, currentUser]);
 
   useEffect(() => {
     // Reset state when username changes
