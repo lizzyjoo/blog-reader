@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { useParams, useNavigate, useLocation, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import Tiptap from "./Tiptap";
 import { trashPost, getPostById, viewPost } from "../api/api";
 import DOMPurify from "dompurify";
 import CommentsSection from "./CommentsSection";
@@ -122,10 +123,7 @@ export default function PostPage() {
           </p>
         </div>
 
-        <div
-          className="post-content"
-          dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(post.content) }}
-        />
+        <Tiptap content={post.content} readOnly />
 
         <div className="post-actions-row">
           <LikeSaveButtons postId={post.id} initialLikes={post.likes} />
