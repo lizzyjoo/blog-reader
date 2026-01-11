@@ -32,7 +32,7 @@ export default function OptionsDropdown({
     if (!isOpen && iconRef.current) {
       const rect = iconRef.current.getBoundingClientRect();
       setPosition({
-        top: rect.bottom + 8,
+        top: rect.bottom + 16,
         right: window.innerWidth - rect.right,
       });
     }
