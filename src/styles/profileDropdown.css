@@ -177,6 +177,8 @@ a {
   transform: scale(var(--nav-active-scale));
   visibility: visible;
   opacity: 1;
+  position: fixed;
+  z-index: 9999;
 }
 
 .popup-window .admin-link {
