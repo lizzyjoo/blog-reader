@@ -84,9 +84,6 @@ export default function AuthorPostList() {
   if (notFound) return <NotFound />;
   if (!user) return <NotFound />;
 
-  const registeredDate = user.registeredDate;
-  console.log(registeredDate);
-
   return (
     <>
       <main>

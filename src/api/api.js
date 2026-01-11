@@ -208,3 +208,16 @@ export async function getPostStatus(postId, token) {
   });
   return response.json();
 }
+
+// OMR operation
+export async function recognizeMusic(imageFile) {
+  const formData = new FormData();
+  formData.append("image", imageFile);
+
+  const response = await fetch(`${base_URL}/api/omr/recognize`, {
+    method: "POST",
+    body: formData,
+    // Note: don't set Content-Type header - browser sets it automatically with boundary for FormData
+  });
+  return response.json();
+}
